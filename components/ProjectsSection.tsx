@@ -260,7 +260,8 @@ const ProjectsSection = () => {
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        marginBottom: '40px'
+        marginBottom: '20px',
+        marginTop: '88px'
       }}>
         <h2 style={{
           fontSize: '32px',

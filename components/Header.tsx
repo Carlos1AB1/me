@@ -7,7 +7,7 @@ const Header = () => {
     { name: 'Inicio', href: '/', type: 'link' },
     { name: 'Github', href: 'https://github.com/tu-usuario', type: 'external' },
     { name: 'Linkedin', href: 'https://linkedin.com/in/tu-perfil', type: 'external' },
-    { name: 'Habilidades', href: '/habilidades', type: 'link' },
+  // ...eliminado: Habilidades...
     { name: 'Servicios', href: '/#servicios', type: 'scroll' },
     { name: 'Blog', href: '/blog', type: 'link' },
     { name: 'Contacto', href: '/#contacto', type: 'scroll' }

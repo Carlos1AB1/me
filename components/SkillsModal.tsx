@@ -16,56 +16,56 @@ const SkillsModal = ({ isOpen, onClose }: SkillsModalProps) => {
       title: 'Frontend Development',
       description: 'Creación de interfaces modernas y responsivas',
       skills: [
-        { name: 'React ⚛️', level: 95, experience: '5+ años' },
-        { name: 'Next.js 🚀', level: 90, experience: '3+ años' },
-        { name: 'TypeScript 📘', level: 88, experience: '4+ años' },
-        { name: 'Vue.js 💚', level: 82, experience: '2+ años' },
-        { name: 'HTML5 🌐', level: 98, experience: '6+ años' },
-        { name: 'CSS3 🎨', level: 95, experience: '6+ años' },
-        { name: 'Sass/SCSS 💎', level: 90, experience: '4+ años' },
-        { name: 'Tailwind CSS 🌊', level: 85, experience: '3+ años' }
+        { name: 'React ⚛️', level: 'Experto' },
+        { name: 'Next.js 🚀', level: 'Experto' },
+        { name: 'TypeScript 📘', level: 'Experto' },
+        { name: 'Vue.js 💚', level: 'Intermedio' },
+        { name: 'HTML5 🌐', level: 'Experto' },
+        { name: 'CSS3 🎨', level: 'Experto' },
+        { name: 'Sass/SCSS 💎', level: 'Experto' },
+        { name: 'Tailwind CSS 🌊', level: 'Intermedio' }
       ]
     },
     {
       title: 'Backend Development',
       description: 'APIs robustas y arquitecturas escalables',
       skills: [
-        { name: 'Node.js 🟢', level: 92, experience: '5+ años' },
-        { name: 'Python 🐍', level: 88, experience: '4+ años' },
-        { name: 'Express.js ⚡', level: 90, experience: '5+ años' },
-        { name: 'Django 🎯', level: 78, experience: '2+ años' },
-        { name: 'GraphQL 📊', level: 82, experience: '3+ años' },
-        { name: 'REST APIs 🔌', level: 95, experience: '5+ años' },
-        { name: 'Microservices 🧩', level: 75, experience: '2+ años' },
-        { name: 'WebSockets ⚡', level: 80, experience: '3+ años' }
+        { name: 'Node.js 🟢', level: 'Experto' },
+        { name: 'Python 🐍', level: 'Experto' },
+        { name: 'Express.js ⚡', level: 'Experto' },
+        { name: 'Django 🎯', level: 'Intermedio' },
+        { name: 'GraphQL 📊', level: 'Intermedio' },
+        { name: 'REST APIs 🔌', level: 'Experto' },
+        { name: 'Microservices 🧩', level: 'Intermedio' },
+        { name: 'WebSockets ⚡', level: 'Intermedio' }
       ]
     },
     {
       title: 'Database & Cloud',
       description: 'Gestión de datos y infraestructura en la nube',
       skills: [
-        { name: 'MongoDB 🍃', level: 90, experience: '4+ años' },
-        { name: 'PostgreSQL 🐘', level: 85, experience: '3+ años' },
-        { name: 'MySQL 🐬', level: 82, experience: '4+ años' },
-        { name: 'Redis ⚡', level: 78, experience: '2+ años' },
-        { name: 'AWS ☁️', level: 80, experience: '3+ años' },
-        { name: 'Docker 🐳', level: 85, experience: '3+ años' },
-        { name: 'Kubernetes ⚙️', level: 70, experience: '1+ años' },
-        { name: 'Firebase 🔥', level: 88, experience: '3+ años' }
+        { name: 'MongoDB 🍃', level: 'Experto' },
+        { name: 'PostgreSQL 🐘', level: 'Intermedio' },
+        { name: 'MySQL 🐬', level: 'Intermedio' },
+        { name: 'Redis ⚡', level: 'Intermedio' },
+        { name: 'AWS ☁️', level: 'Intermedio' },
+        { name: 'Docker 🐳', level: 'Intermedio' },
+        { name: 'Kubernetes ⚙️', level: 'Básico' },
+        { name: 'Firebase 🔥', level: 'Experto' }
       ]
     },
     {
       title: 'Mobile & Tools',
       description: 'Desarrollo móvil y herramientas de productividad',
       skills: [
-        { name: 'React Native 📱', level: 85, experience: '3+ años' },
-        { name: 'Flutter 🦋', level: 75, experience: '2+ años' },
-        { name: 'Git 📋', level: 95, experience: '6+ años' },
-        { name: 'Webpack 📦', level: 80, experience: '4+ años' },
-        { name: 'Jest 🧪', level: 88, experience: '4+ años' },
-        { name: 'Figma 🎨', level: 82, experience: '3+ años' },
-        { name: 'VS Code 💻', level: 98, experience: '6+ años' },
-        { name: 'Linux 🐧', level: 85, experience: '4+ años' }
+        { name: 'React Native 📱', level: 'Intermedio' },
+        { name: 'Flutter 🦋', level: 'Básico' },
+        { name: 'Git 📋', level: 'Experto' },
+        { name: 'Webpack 📦', level: 'Intermedio' },
+        { name: 'Jest 🧪', level: 'Experto' },
+        { name: 'Figma 🎨', level: 'Intermedio' },
+        { name: 'VS Code 💻', level: 'Experto' },
+        { name: 'Linux 🐧', level: 'Intermedio' }
       ]
     }
   ]
@@ -74,59 +74,69 @@ const SkillsModal = ({ isOpen, onClose }: SkillsModalProps) => {
     {
       name: 'React',
       icon: '⚛️',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
       gradient: 'linear-gradient(135deg, #61dafb 0%, #21759b 100%)'
     },
     {
       name: 'Next.js',
       icon: '🚀',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
       gradient: 'linear-gradient(135deg, #000000 0%, #434343 100%)'
     },
     {
       name: 'TypeScript',
       icon: '📘',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
       gradient: 'linear-gradient(135deg, #3178c6 0%, #1e40af 100%)'
     },
     {
       name: 'Node.js',
       icon: '🟢',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
       gradient: 'linear-gradient(135deg, #68d391 0%, #38a169 100%)'
     },
     {
       name: 'Python',
       icon: '🐍',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
       gradient: 'linear-gradient(135deg, #3776ab 0%, #ffd43b 100%)'
     },
     {
       name: 'AWS',
       icon: '☁️',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
       gradient: 'linear-gradient(135deg, #ff9900 0%, #ec7211 100%)'
     },
     {
       name: 'Docker',
       icon: '🐳',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
       gradient: 'linear-gradient(135deg, #2496ed 0%, #0db7ed 100%)'
     },
     {
       name: 'MongoDB',
       icon: '🍃',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
       gradient: 'linear-gradient(135deg, #47a248 0%, #4caf50 100%)'
     },
     {
       name: 'Git',
       icon: '📋',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
       gradient: 'linear-gradient(135deg, #f05032 0%, #ff6b35 100%)'
     },
     {
       name: 'Vue.js',
       icon: '💚',
+      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
       gradient: 'linear-gradient(135deg, #4fc08d 0%, #42b883 100%)'
     }
   ]
 
-  const getSkillColor = (level: number) => {
-    if (level >= 90) return '#00d084'
-    if (level >= 80) return '#1d6ff2'
-    if (level >= 70) return '#ff9500'
+  const getSkillColor = (level: string) => {
+    if (level === 'Experto') return '#00d084'
+    if (level === 'Intermedio') return '#1d6ff2'
+    if (level === 'Básico') return '#ff9500'
     return '#ff3b30'
   }
 
@@ -355,17 +365,11 @@ const SkillsModal = ({ isOpen, onClose }: SkillsModalProps) => {
                               gap: '6px'
                             }}>
                               <span style={{
-                                fontSize: '11px',
-                                color: 'var(--text-secondary)'
-                              }}>
-                                {skill.experience}
-                              </span>
-                              <span style={{
                                 fontSize: '12px',
                                 fontWeight: '600',
-                                color: getSkillColor(skill.level)
+                                color: 'var(--text-primary)'
                               }}>
-                                {skill.level}%
+                                {skill.level}
                               </span>
                             </div>
                           </div>
@@ -379,7 +383,7 @@ const SkillsModal = ({ isOpen, onClose }: SkillsModalProps) => {
                           }}>
                             <motion.div
                               initial={{ width: 0 }}
-                              animate={{ width: `${skill.level}%` }}
+                              animate={{ width: '100%' }}
                               transition={{ 
                                 duration: 1.5, 
                                 delay: categoryIndex * 0.1 + skillIndex * 0.1,

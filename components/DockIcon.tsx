@@ -7,6 +7,7 @@ interface DockIconProps {
   tech: {
     name: string
     icon: string
+    image?: string
     gradient: string
   }
   mouseX: any
@@ -73,7 +74,20 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
         }}
         whileTap={{ scale: 0.95 }}
       >
-        {tech.icon}
+        {tech.image ? (
+          <img 
+            src={tech.image} 
+            alt={tech.name}
+            style={{
+              width: '70%',
+              height: '70%',
+              objectFit: 'contain',
+              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+            }}
+          />
+        ) : (
+          tech.icon
+        )}
         
         {/* Efecto de brillo */}
         <motion.div
