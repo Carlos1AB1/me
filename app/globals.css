@@ -1,0 +1,1029 @@
+/* =================================== */
+/* APPLE OFFICIAL TYPOGRAPHY - SF PRO FAMILY */
+/* =================================== */
+
+/* SF Pro Display - Para encabezados y títulos grandes */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: local('SF Pro Display'), 
+       local('SFProDisplay-Regular'),
+       local('SF Pro Display Regular'),
+       local('-apple-system'), 
+       local('BlinkMacSystemFont');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* SF Pro Text - Para párrafos y textos pequeños */
+@font-face {
+  font-family: 'SF Pro Text';
+  src: local('SF Pro Text'), 
+       local('SFProText-Regular'),
+       local('SF Pro Text Regular'),
+       local('-apple-system'), 
+       local('BlinkMacSystemFont');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* CSS Variables for Dark/Light Mode */
+:root {
+  /* Light Mode Colors */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #f5f5f7;
+  --text-primary: #1D1D1F;
+  --text-secondary: #6e6e73;
+  --text-tertiary: #86868b;
+  --border-color: #d2d2d7;
+  --link-color: #0066cc;
+  --link-hover: #007aff;
+  --card-bg: #FFFFFF;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --header-bg: #FFFFFF;
+  --nav-bg: #f5f5f7;
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Colors */
+  --bg-primary: #000000;
+  --bg-secondary: #1c1c1e;
+  --text-primary: #F5F5F7;
+  --text-secondary: #a1a1a6;
+  --text-tertiary: #86868b;
+  --border-color: #38383a;
+  --link-color: #007aff;
+  --link-hover: #409cff;
+  --card-bg: #1c1c1e;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --header-bg: #000000;
+  --nav-bg: #1c1c1e;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuración base del body con la pila de fuentes oficial de Apple */
+body {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  
+  /* Optimizaciones de renderizado de Apple */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  
+  /* Support for Dynamic Type */
+  font-synthesis: none;
+  font-kerning: auto;
+  font-variant-ligatures: contextual;
+}
+
+/* =================================== */
+/* ENCABEZADOS - SF Pro Display */
+/* =================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* H1 - Títulos principales (Hero sections) */
+h1 {
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.07143;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+}
+
+/* H2 - Títulos de sección */
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.125;
+  letter-spacing: -0.003em;
+  margin-bottom: 16px;
+}
+
+/* H3 - Subtítulos */
+h3 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.14286;
+  letter-spacing: -0.003em;
+  margin-bottom: 12px;
+}
+
+/* H4 - Títulos menores */
+h4 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.16667;
+  letter-spacing: -0.001em;
+  margin-bottom: 10px;
+}
+
+/* H5 y H6 */
+h5 {
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.19048;
+  letter-spacing: 0.011em;
+  margin-bottom: 8px;
+}
+
+h6 {
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.21053;
+  letter-spacing: 0.012em;
+  margin-bottom: 6px;
+}
+
+/* =================================== */
+/* TEXTO CORRIDO - SF Pro Text */
+/* =================================== */
+
+p, span, div, li, td, th {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  font-weight: 400;
+}
+
+/* Párrafos estándar */
+p {
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+/* Texto secundario (como subtítulos y descripciones) */
+.text-secondary, .subtitle {
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  color: var(--text-secondary);
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+/* =================================== */
+/* ELEMENTOS ESPECÍFICOS DE APPLE */
+/* =================================== */
+
+/* Navegación - Texto pequeño */
+.nav-text, nav a, .navigation {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33337;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+/* Botones - Estilo Apple */
+button, .button, .btn {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.23536;
+  letter-spacing: -0.022em;
+  border: none;
+  cursor: pointer;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+/* Enlaces */
+a {
+  color: inherit;
+  text-decoration: none;
+  font-family: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Texto pequeño (disclaimers, footnotes) */
+.small-text, small, .footnote {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33337;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+}
+
+/* Texto de etiquetas/badges */
+.badge-text, .tag {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* =================================== */
+/* RESPONSIVE DESIGN */
+/* =================================== */
+
+/* Tablets (iPad) */
+@media (max-width: 1068px) {
+  h1 {
+    font-size: 48px;
+    line-height: 1.08333;
+    letter-spacing: -0.003em;
+  }
+  
+  h2 {
+    font-size: 28px;
+    line-height: 1.14286;
+  }
+  
+  h3 {
+    font-size: 24px;
+    line-height: 1.16667;
+  }
+  
+  p, .text-secondary {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Grid responsivo */
+  .product-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+  }
+  
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Mobile (iPhone) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+    line-height: 1.125;
+    letter-spacing: -0.001em;
+    margin-bottom: 16px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    line-height: 1.16667;
+    margin-bottom: 12px;
+  }
+  
+  h3 {
+    font-size: 21px;
+    line-height: 1.19048;
+    margin-bottom: 10px;
+  }
+  
+  p, .text-secondary {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  
+  /* Ocultar navegación en móvil */
+  .nav-items {
+    display: none !important;
+  }
+  
+  /* Grid responsivo móvil */
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  .offers-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* iPhone SE y pantallas muy pequeñas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+    line-height: 1.14286;
+  }
+  
+  h2 {
+    font-size: 21px;
+    line-height: 1.19048;
+  }
+  
+  p, .text-secondary {
+    font-size: 15px;
+    line-height: 1.53333;
+  }
+}
+
+/* =================================== */
+/* PANTALLAS RETINA Y HIGH-DPI */
+/* =================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Mejora específica para pantallas Retina */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    /* Ajuste sutil para pantallas Retina */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+  
+  .nav-text, .small-text {
+    font-weight: 400;
+    /* Mejor legibilidad en pantallas de alta densidad */
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+  
+  /* Ajustes específicos para SF Pro en pantallas Retina */
+  [class*="SF Pro"] {
+    font-optical-sizing: auto;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+  }
+}
+
+/* =================================== */
+/* SOPORTE PARA DYNAMIC TYPE (iOS/macOS) */
+/* =================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+}
+
+/* Soporte para preferencias de contraste */
+@media (prefers-contrast: high) {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+  
+  body {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Dark Mode Support removido - mantenemos solo el diseño claro de Apple */
+
+/* =================================== */
+/* UTILIDADES ADICIONALES */
+/* =================================== */
+
+/* Transiciones suaves estilo Apple */
+* {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Scrollbar personalizado estilo Apple */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Dark mode toggle styles moved to inline styles in component */
+
+/* =================================== */
+/* TILT CARD EFFECT - FRAMER MOTION RESPONSIVE */
+/* =================================== */
+
+.tilt-card {
+  will-change: transform;
+  perspective: 1000px;
+}
+
+/* Animación de entrada para las cards */
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tilt-card {
+  animation: cardSlideUp 0.6s ease-out forwards;
+}
+
+/* Ultra wide screens */
+@media (min-width: 1400px) {
+  .tilt-card {
+    min-width: 320px !important;
+    width: 320px !important;
+    height: 500px !important;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+  .tilt-card {
+    min-width: 280px !important;
+    width: 280px !important;
+    height: 460px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .tilt-card {
+    min-width: 260px !important;
+    width: 260px !important;
+    height: 440px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .tilt-card {
+    min-width: 240px !important;
+    width: 240px !important;
+    height: 420px !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .tilt-card {
+    min-width: 220px !important;
+    width: 220px !important;
+    height: 400px !important;
+  }
+}
+
+/* Optimización para móviles - reducir efectos en pantallas táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .tilt-card {
+    transform: none !important;
+  }
+}
+
+/* =================================== */
+/* MAC DOCK EFFECT */
+/* =================================== */
+
+.dock-container {
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .dock-container {
+  background: rgba(28, 28, 30, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* =================================== */
+/* DOCK RESPONSIVE COMPLETO */
+/* =================================== */
+
+/* Ultra wide screens */
+@media (min-width: 1400px) {
+  .dock-container {
+    gap: 12px !important;
+    padding: 25px 50px !important;
+    height: 220px !important;
+    border-radius: 36px !important;
+  }
+}
+
+/* Desktop large */
+@media (max-width: 1200px) {
+  .dock-container {
+    gap: 10px !important;
+    padding: 20px 40px !important;
+    height: 200px !important;
+    border-radius: 32px !important;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+  .dock-container {
+    gap: 9px !important;
+    padding: 18px 35px !important;
+    height: 180px !important;
+    border-radius: 30px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .dock-container {
+    gap: 8px !important;
+    padding: 15px 25px !important;
+    height: 160px !important;
+    border-radius: 26px !important;
+    max-width: 95vw !important;
+  }
+}
+
+/* Mobile large */
+@media (max-width: 640px) {
+  .dock-container {
+    gap: 7px !important;
+    padding: 12px 20px !important;
+    height: 140px !important;
+    border-radius: 24px !important;
+    max-width: 90vw !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .dock-container {
+    gap: 8px !important;
+    padding: 12px 20px !important;
+    height: 120px !important;
+    border-radius: 20px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    max-width: calc(100vw - 24px) !important;
+    width: calc(100vw - 24px) !important;
+    justify-content: flex-start !important;
+    margin: 0 12px !important;
+  }
+  
+  .dock-container::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .dock-container {
+    gap: 6px !important;
+    padding: 10px 16px !important;
+    height: 110px !important;
+    border-radius: 18px !important;
+    max-width: calc(100vw - 16px) !important;
+    width: calc(100vw - 16px) !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    margin: 0 8px !important;
+  }
+  
+  .dock-container::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 320px) {
+  .dock-container {
+    gap: 5px !important;
+    padding: 8px 12px !important;
+    height: 100px !important;
+    border-radius: 16px !important;
+    max-width: calc(100vw - 12px) !important;
+    width: calc(100vw - 12px) !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    margin: 0 6px !important;
+  }
+}
+
+/* =================================== */
+/* DOCK ICONS RESPONSIVE */
+/* =================================== */
+
+/* Mobile dock icons optimized */
+@media (max-width: 480px) {
+  .dock-icon {
+    min-width: 70px !important;
+    height: 100px !important;
+    padding-bottom: 10px !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .dock-icon {
+    min-width: 65px !important;
+    height: 90px !important;
+    padding-bottom: 8px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .dock-icon {
+    min-width: 60px !important;
+    height: 80px !important;
+    padding-bottom: 6px !important;
+  }
+}
+
+/* Skills Section Responsive */
+@media (max-width: 768px) {
+  .skills-section {
+    padding: 1px 16px 60px !important;
+  }
+}
+
+/* =================================== */
+/* UPDATED CARD STYLES FOR DARK MODE */
+/* =================================== */
+
+/* Cards and containers */
+.card, .offer-card, .product-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 20px var(--shadow) !important;
+  transition: all 0.3s ease !important;
+}
+
+.card:hover, .offer-card:hover, .product-card:hover {
+  box-shadow: 0 8px 30px var(--shadow) !important;
+}
+
+/* Selección de texto estilo Apple */
+::selection {
+  background: #007aff;
+  color: white;
+}
+
+::-moz-selection {
+  background: #007aff;
+  color: white;
+}
+
+/* Focus states accesibles */
+button:focus, a:focus {
+  outline: 2px solid #007aff;
+  outline-offset: 2px;
+}
+
+/* =================================== */
+/* PROJECTS SCROLL CONTAINER */
+/* =================================== */
+
+.projects-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+.projects-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Asegurar que el contenido no se corte */
+.projects-scroll {
+  box-sizing: border-box;
+}
+
+/* =================================== */
+/* PROJECTS SECTION RESPONSIVE COMPLETO */
+/* =================================== */
+
+/* Ultra wide screens */
+@media (min-width: 1400px) {
+  .projects-section {
+    padding: 0 120px !important;
+  }
+}
+
+/* Desktop large */
+@media (max-width: 1200px) {
+  .projects-section {
+    padding: 0 100px !important;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+  .projects-section {
+    padding: 0 80px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: 0 60px !important;
+  }
+  
+  .projects-nav-button {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  .projects-nav-button:first-of-type {
+    left: -50px !important;
+  }
+  
+  .projects-nav-button:last-of-type {
+    right: -50px !important;
+  }
+  
+  .projects-scroll {
+    padding-right: 60px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .projects-section {
+    padding: 0 20px !important;
+  }
+  
+  .projects-nav-button {
+    width: 32px !important;
+    height: 32px !important;
+    top: 200px !important;
+    display: flex !important;
+  }
+  
+  .projects-nav-button:first-of-type {
+    left: -35px !important;
+  }
+  
+  .projects-nav-button:last-of-type {
+    right: -35px !important;
+  }
+  
+  .projects-scroll {
+    padding-right: 40px !important;
+    padding-left: 10px !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .projects-section {
+    padding: 0 12px !important;
+  }
+  
+  .projects-scroll {
+    padding-right: 30px !important;
+    padding-left: 8px !important;
+  }
+}
+
+/* =================================== */
+/* HEADER RESPONSIVE */
+/* =================================== */
+
+/* Ultra wide screens */
+@media (min-width: 1400px) {
+  .nav-items {
+    gap: 40px !important;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1200px) {
+  .nav-items {
+    gap: 25px !important;
+  }
+  
+  .nav-items a {
+    font-size: 11px !important;
+  }
+}
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .nav-items {
+    gap: 20px !important;
+  }
+  
+  .nav-items a {
+    font-size: 10px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .nav-items {
+    display: none !important;
+  }
+  
+  .header-nav {
+    justify-content: space-between !important;
+  }
+  
+  .header-logo {
+    position: relative !important;
+    left: auto !important;
+  }
+  
+  .header-icons {
+    position: relative !important;
+    right: auto !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .header-top {
+    font-size: 10px !important;
+    padding: 6px 0 !important;
+  }
+  
+  .header-main {
+    padding: 0 12px !important;
+  }
+  
+  .header-nav {
+    height: 40px !important;
+  }
+  
+  .header-icons button {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .header-promo {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+    line-height: 1.3 !important;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 360px) {
+  .header-top {
+    display: none !important;
+  }
+  
+  .header-main {
+    padding: 0 8px !important;
+  }
+  
+  .header-promo {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 320px) {
+  .header-main {
+    padding: 0 6px !important;
+  }
+  
+  .header-nav {
+    height: 36px !important;
+  }
+  
+  .header-logo a {
+    font-size: 16px !important;
+  }
+  
+  .header-icons {
+    gap: 12px !important;
+  }
+  
+  .header-icons button {
+    width: 28px !important;
+    height: 28px !important;
+    padding: 2px !important;
+  }
+  
+  .header-promo {
+    font-size: 10px !important;
+    padding: 4px 6px !important;
+    line-height: 1.1 !important;
+  }
+}
+
+/* =================================== */
+/* HELP WIDGET & DARK MODE TOGGLE RESPONSIVE */
+/* =================================== */
+
+/* Help Widget */
+@media (max-width: 1024px) {
+  .help-widget {
+    right: 15px !important;
+    width: 280px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .help-widget {
+    right: 12px !important;
+    width: 260px !important;
+    top: 20px !important;
+    font-size: 14px !important;
+    padding: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .help-widget {
+    right: 8px !important;
+    width: 240px !important;
+    top: 15px !important;
+    font-size: 13px !important;
+    padding: 12px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .help-widget {
+    right: 4px !important;
+    width: 200px !important;
+    font-size: 12px !important;
+    padding: 10px !important;
+  }
+}
+
+/* Dark Mode Toggle */
+@media (max-width: 768px) {
+  .dark-mode-toggle {
+    top: 260px !important;
+    right: 15px !important;
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dark-mode-toggle {
+    top: 240px !important;
+    right: 12px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .dark-mode-toggle {
+    top: 220px !important;
+    right: 8px !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* =================================== */
+/* CLASES DE UTILIDAD */
+/* =================================== */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-weight-light { font-weight: 300; }
+.font-weight-normal { font-weight: 400; }
+.font-weight-medium { font-weight: 500; }
+.font-weight-semibold { font-weight: 600; }
+.font-weight-bold { font-weight: 700; }
+
+.color-primary { color: #1d1d1f; }
+.color-secondary { color: #6e6e73; }
+.color-blue { color: #007aff; }
+.color-link { color: #0066cc; }
