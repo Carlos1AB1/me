@@ -4,14 +4,13 @@
 
 const Header = () => {
   const navItems = [
-    'Inicio',
-    'Sobre mí',
-    'Github',
-    'Linkedin',
-    'Habilidades',
-    'Servicios',
-    'Blog',
-    'Contacto'
+    { name: 'Inicio', href: '/', type: 'link' },
+    { name: 'Github', href: 'https://github.com/tu-usuario', type: 'external' },
+    { name: 'Linkedin', href: 'https://linkedin.com/in/tu-perfil', type: 'external' },
+    { name: 'Habilidades', href: '/habilidades', type: 'link' },
+    { name: 'Servicios', href: '/#servicios', type: 'scroll' },
+    { name: 'Blog', href: '/blog', type: 'link' },
+    { name: 'Contacto', href: '/#contacto', type: 'scroll' }
   ];
   
 
@@ -69,38 +68,53 @@ const Header = () => {
             </a>
           </div>
 
-          {/* Navegación centrada */}
-          <div 
-            className="nav-items"
-            style={{
-              display: 'flex',
-              gap: '30px',
-              alignItems: 'center'
-            }}>
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                style={{
-                  color: 'var(--text-primary)',
-                  textDecoration: 'none',
-                  fontSize: '12px',
-                  fontWeight: '400',
-                  transition: 'color 0.3s ease'
-                }}
-                onMouseOver={(e) => {
-                  const target = e.target as HTMLElement
-                  target.style.color = 'var(--link-hover)'
-                }}
-                onMouseOut={(e) => {
-                  const target = e.target as HTMLElement
-                  target.style.color = 'var(--text-primary)'
-                }}
-              >
-                {item}
-              </a>
-            ))}
-          </div>
+                         {/* Navegación centrada */}
+               <div 
+                 className="nav-items"
+                 style={{
+                   display: 'flex',
+                   gap: '30px',
+                   alignItems: 'center'
+                 }}>
+                 {navItems.map((item) => (
+                   <a
+                     key={item.name}
+                     href={item.href}
+                     target={item.type === 'external' ? '_blank' : undefined}
+                     rel={item.type === 'external' ? 'noopener noreferrer' : undefined}
+                     style={{
+                       color: 'var(--text-primary)',
+                       textDecoration: 'none',
+                       fontSize: '12px',
+                       fontWeight: '400',
+                       transition: 'color 0.3s ease'
+                     }}
+                     onMouseOver={(e) => {
+                       const target = e.target as HTMLElement
+                       target.style.color = 'var(--link-hover)'
+                     }}
+                     onMouseOut={(e) => {
+                       const target = e.target as HTMLElement
+                       target.style.color = 'var(--text-primary)'
+                     }}
+                     onClick={(e) => {
+                       if (item.type === 'scroll') {
+                         e.preventDefault()
+                         const targetId = item.href.split('#')[1]
+                         const targetElement = document.getElementById(targetId)
+                         if (targetElement) {
+                           targetElement.scrollIntoView({ 
+                             behavior: 'smooth',
+                             block: 'start'
+                           })
+                         }
+                       }
+                     }}
+                   >
+                     {item.name}
+                   </a>
+                 ))}
+               </div>
 
 
         </nav>

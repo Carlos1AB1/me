@@ -9,9 +9,10 @@ interface MacDockProps {
     icon: string
     gradient: string
   }>
+  onClick?: () => void
 }
 
-const MacDock = ({ technologies }: MacDockProps) => {
+const MacDock = ({ technologies, onClick }: MacDockProps) => {
   const mouseX = useMotionValue(Infinity)
   
   // Detectar si es móvil
@@ -21,7 +22,9 @@ const MacDock = ({ technologies }: MacDockProps) => {
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
+      onClick={onClick}
       style={{
+        cursor: onClick ? 'pointer' : 'default',
         display: 'flex',
         height: isMobile ? '120px' : '140px',
         alignItems: 'end',

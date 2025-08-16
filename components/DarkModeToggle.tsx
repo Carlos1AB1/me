@@ -37,7 +37,7 @@ const DarkModeToggle = () => {
       className="dark-mode-toggle"
       style={{
         position: 'fixed',
-        top: '280px',
+        top: '250px',
         right: '20px',
         zIndex: 1000,
         width: '44px',

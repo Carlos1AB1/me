@@ -1,8 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import MacDock from './MacDock'
+import SkillsModal from './SkillsModal'
 
 const SkillsGrid = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const technologies = [
     { name: 'React', icon: '⚛️', gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)' },
     { name: 'Next.js', icon: '🚀', gradient: 'linear-gradient(135deg, #636e72 0%, #2d3436 100%)' },
@@ -16,18 +19,28 @@ const SkillsGrid = () => {
   ]
 
   return (
-    <section 
-      className="skills-section"
-      style={{
-        width: '100%',
-        margin: '0',
-        padding: 'clamp(1px, 1vw, 1px) 0 clamp(40px, 12vw, 80px)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-      <MacDock technologies={technologies} />
-    </section>
+    <>
+      <section 
+        className="skills-section"
+        style={{
+          width: '100%',
+          margin: '0',
+          padding: 'clamp(1px, 1vw, 1px) 0 clamp(40px, 12vw, 80px)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <MacDock 
+          technologies={technologies} 
+          onClick={() => setIsModalOpen(true)}
+        />
+      </section>
+      
+      <SkillsModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
+    </>
   )
 }
 
