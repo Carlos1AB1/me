@@ -56,18 +56,18 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
     return val - bounds.x - bounds.width / 2
   })
 
-  // Efecto de magnificación (tamaños más grandes)
+  // Efecto de magnificación (tamaños más grandes y más rápido)
   const widthSync = useTransform(distance, [-150, 0, 150], isMobile ? [100, 100, 100] : [100, 140, 100])
-  const width = useSpring(widthSync, { mass: 0.1, stiffness: 200, damping: 15 })
+  const width = useSpring(widthSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   const heightSync = useTransform(distance, [-150, 0, 150], isMobile ? [100, 100, 100] : [100, 140, 100])
-  const height = useSpring(heightSync, { mass: 0.1, stiffness: 200, damping: 15 })
+  const height = useSpring(heightSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   const iconSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [50, 50, 50] : [50, 70, 50])
-  const iconSize = useSpring(iconSizeSync, { mass: 0.1, stiffness: 200, damping: 15 })
+  const iconSize = useSpring(iconSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [14, 14, 14] : [14, 16, 14])
-  const textSize = useSpring(textSizeSync, { mass: 0.1, stiffness: 200, damping: 15 })
+  const textSize = useSpring(textSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   return (
     <motion.div
