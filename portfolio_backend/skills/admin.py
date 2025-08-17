@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.utils.safestring import mark_safe
+from django import forms
 from core.widgets import ImagePreviewWidget, ColorPickerWidget
 from .models import SkillCategory, Skill
 
@@ -44,6 +45,12 @@ class SkillAdmin(admin.ModelAdmin):
             kwargs['widget'] = ImagePreviewWidget
         elif db_field.name == 'color':
             kwargs['widget'] = ColorPickerWidget
+        elif db_field.name == 'gradient_css':
+            kwargs['widget'] = forms.Textarea(attrs={
+                'rows': 3, 
+                'cols': 60,
+                'placeholder': 'Ejemplo: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%)'
+            })
         return super().formfield_for_dbfield(db_field, **kwargs)
     
     fieldsets = (
@@ -51,7 +58,7 @@ class SkillAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image', 'image_preview', 'color', 'gradient_type')
+            'fields': ('icon', 'image', 'image_preview', 'color', 'gradient_type', 'gradient_css')
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')

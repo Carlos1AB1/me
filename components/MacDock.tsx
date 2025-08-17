@@ -10,6 +10,7 @@ interface MacDockProps {
     image?: string
     color: string
     gradient_type: string
+    gradient_css?: string
   }>
   onClick?: () => void
 }

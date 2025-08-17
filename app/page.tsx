@@ -24,6 +24,7 @@ export default function Home() {
     image?: string;
     color: string;
     gradient_type: string;
+    gradient_css?: string;
   }>>([])
 
   useEffect(() => {
@@ -41,14 +42,15 @@ export default function Home() {
           icon: skill.icon || '⚡',
           image: skill.image,
           color: skill.color || '#74b9ff',
-          gradient_type: skill.gradient_type || 'linear-diagonal-1'
+          gradient_type: skill.gradient_type || 'linear-diagonal-1',
+          gradient_css: skill.gradient_css || null
         }))
         
         console.log('Tech data processed:', techData) // Debug log
         setTechnologies(techData)
       } catch (error) {
         console.error('Error loading skills:', error)
-        // Si hay error, usar datos de fallback
+        // Si hay error, usar datos de fallback simples
         const fallbackTechnologies = [
           {
             name: 'React',

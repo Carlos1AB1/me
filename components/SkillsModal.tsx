@@ -47,14 +47,16 @@ const SkillsModal = ({ isOpen, onClose, skills = [] }: SkillsModalProps) => {
     image?: string;
     color: string;
     gradient_type: string;
+    gradient_css?: string;
   }> = skills.length > 0 ? skills.map((skill: any) => ({
     name: skill.name,
     icon: skill.icon || '⚡',
     image: skill.image,
     color: skill.color || '#74b9ff',
-    gradient_type: skill.gradient_type || 'linear-diagonal-1'
+    gradient_type: skill.gradient_type || 'linear-diagonal-1',
+    gradient_css: skill.gradient_css || null
   })) : [
-    // Datos de fallback
+    // Datos de fallback simples
     {
       name: 'React',
       icon: '⚛️',

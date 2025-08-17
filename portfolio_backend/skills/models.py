@@ -60,6 +60,11 @@ class Skill(models.Model):
         default='linear-diagonal-1',
         verbose_name='Tipo de Degradado'
     )
+    gradient_css = models.TextField(
+        blank=True,
+        verbose_name='CSS del Degradado Personalizado',
+        help_text='Ejemplo: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%). Si está vacío, se usará el color y tipo seleccionados arriba.'
+    )
     description = models.TextField(blank=True, verbose_name='Descripción')
     years_experience = models.PositiveIntegerField(default=0, verbose_name='Años de experiencia')
     is_featured = models.BooleanField(default=False, verbose_name='Destacada')

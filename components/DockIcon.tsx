@@ -2,7 +2,6 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { getSkillGradient } from '../utils/gradientGenerator'
 
 interface DockIconProps {
   tech: {
@@ -11,6 +10,7 @@ interface DockIconProps {
     image?: string
     color: string
     gradient_type: string
+    gradient_css?: string
   }
   mouseX: any
 }
@@ -21,12 +21,8 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   // Detectar si es móvil
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 480
 
-  // Generar el degradado dinámico con validación
-  const dynamicGradient = getSkillGradient(
-    tech.name || 'Default',
-    tech.color || '#74b9ff',
-    tech.gradient_type || 'linear-diagonal-1'
-  )
+  // Usar el degradado personalizado del admin o color sólido como fallback
+  const backgroundStyle = tech.gradient_css || tech.color || '#74b9ff'
 
   const distance = useTransform(mouseX, (val: number) => {
     if (isMobile) return 100 // Desactivar magnification en móviles
@@ -65,7 +61,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
         style={{
           width,
           height,
-          background: dynamicGradient,
+          background: backgroundStyle,
           borderRadius: '16px',
           display: 'flex',
           alignItems: 'center',
