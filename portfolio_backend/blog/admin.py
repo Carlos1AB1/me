@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
 from .models import Category, BlogPost
 
 @admin.register(Category)
@@ -17,17 +18,27 @@ class BlogPostAdmin(admin.ModelAdmin):
     """
     Admin para posts del blog
     """
-    list_display = ['title', 'status', 'is_featured', 'author', 'views_count', 'created_at']
+    list_display = ['title', 'status', 'is_featured', 'image_preview', 'author', 'views_count', 'created_at']
     list_filter = ['status', 'is_featured', 'categories', 'created_at']
     search_fields = ['title', 'excerpt', 'content']
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ['status', 'is_featured']
     ordering = ['-created_at']
     filter_horizontal = ['categories']
+    readonly_fields = ['image_preview']
+    
+    def image_preview(self, obj):
+        """
+        Muestra una vista previa de la imagen en el admin
+        """
+        if obj.featured_image:
+            return mark_safe(f'<img src="{obj.featured_image.url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
+        return "Sin imagen"
+    image_preview.short_description = "Vista previa"
     
     fieldsets = (
         ('Contenido', {
-            'fields': ('title', 'slug', 'excerpt', 'content', 'featured_image')
+            'fields': ('title', 'slug', 'excerpt', 'content', 'featured_image', 'image_preview')
         }),
         ('Categorización', {
             'fields': ('categories', 'tags')

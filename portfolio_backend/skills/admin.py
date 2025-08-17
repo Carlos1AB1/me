@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.utils.html import mark_safe
+from django.utils.safestring import mark_safe
+from core.widgets import ImagePreviewWidget
 from .models import SkillCategory, Skill
 
 @admin.register(SkillCategory)
@@ -17,18 +20,36 @@ class SkillAdmin(admin.ModelAdmin):
     """
     Admin para habilidades
     """
-    list_display = ['name', 'category', 'level', 'years_experience', 'is_featured', 'order']
+    list_display = ['name', 'category', 'level', 'years_experience', 'is_featured', 'image_preview', 'order']
     list_filter = ['category', 'level', 'is_featured']
     search_fields = ['name', 'description']
     list_editable = ['level', 'is_featured', 'order']
     ordering = ['category', 'order', 'name']
+    readonly_fields = ['image_preview']
+    
+    def image_preview(self, obj):
+        """
+        Muestra una vista previa de la imagen en el admin
+        """
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />')
+        return "Sin imagen"
+    image_preview.short_description = "Vista previa"
+    
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        """
+        Personalizar el widget para el campo imagen
+        """
+        if db_field.name == 'image':
+            kwargs['widget'] = ImagePreviewWidget
+        return super().formfield_for_dbfield(db_field, **kwargs)
     
     fieldsets = (
         ('Información básica', {
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image_url')
+            'fields': ('icon', 'image', 'image_preview')
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')

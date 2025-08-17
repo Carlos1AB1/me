@@ -201,6 +201,63 @@ class ApiClient {
   async healthCheck(): Promise<any> {
     return this.request<any>('/core/health/');
   }
+
+  // Métodos para subida de imágenes
+  async uploadImage(file: File, category: string = 'general'): Promise<any> {
+    const formData = new FormData();
+    formData.append('image', file);
+    formData.append('category', category);
+
+    const token = getToken();
+    const response = await fetch(`${this.baseURL}/core/images/upload/`, {
+      method: 'POST',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  }
+
+  async uploadMultipleImages(files: File[], category: string = 'general'): Promise<any> {
+    const formData = new FormData();
+    files.forEach(file => {
+      formData.append('images', file);
+    });
+    formData.append('category', category);
+
+    const token = getToken();
+    const response = await fetch(`${this.baseURL}/core/images/upload-multiple/`, {
+      method: 'POST',
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  }
+
+  async getImages(category?: string): Promise<any> {
+    const queryParams = category ? `?category=${category}` : '';
+    return this.request<any>(`/core/images/${queryParams}`);
+  }
+
+  async deleteImage(filePath: string): Promise<any> {
+    const encodedPath = encodeURIComponent(filePath);
+    return this.request<any>(`/core/images/delete/${encodedPath}/`, {
+      method: 'DELETE',
+    });
+  }
 }
 
 // Instancia singleton del cliente API

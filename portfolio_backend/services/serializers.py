@@ -19,6 +19,7 @@ class ServiceListSerializer(serializers.ModelSerializer):
     category_icon = serializers.CharField(source='category.icon', read_only=True)
     price_display = serializers.SerializerMethodField()
     duration_display = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Service
@@ -27,6 +28,18 @@ class ServiceListSerializer(serializers.ModelSerializer):
             'short_description', 'icon', 'image', 'price_type', 'price_display',
             'duration', 'duration_display', 'is_featured', 'order'
         ]
+
+    def get_image(self, obj):
+        """
+        Devuelve la URL completa de la imagen
+        """
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            else:
+                return f"http://127.0.0.1:8000{obj.image.url}"
+        return None
 
     def get_price_display(self, obj):
         return obj.get_price_display()
@@ -42,6 +55,7 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
     additional_features = ServiceFeatureSerializer(many=True, read_only=True)
     price_display = serializers.SerializerMethodField()
     duration_display = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Service
@@ -53,6 +67,18 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
             'show_price', 'order', 'meta_description', 'meta_keywords',
             'created_at', 'updated_at'
         ]
+
+    def get_image(self, obj):
+        """
+        Devuelve la URL completa de la imagen
+        """
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            else:
+                return f"http://127.0.0.1:8000{obj.image.url}"
+        return None
 
     def get_price_display(self, obj):
         return obj.get_price_display()

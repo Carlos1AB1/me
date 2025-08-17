@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Developer Portfolio - Estilo Apple',
+  title: 'Portafolio de Carlos Arturo B.',
   description: 'Portafolio de desarrollador con el diseño elegante y profesional inspirado en Apple',
   keywords: 'developer, portfolio, programador, apple design, react, nextjs',
-  authors: [{ name: 'Tu Nombre' }],
+  authors: [{ name: 'Carlos Arturo B.' }],
   openGraph: {
-    title: 'Developer Portfolio - Estilo Apple',
+    title: 'Desarrollador',
     description: 'Portafolio de desarrollador con el diseño elegante y profesional inspirado en Apple',
     type: 'website',
   },

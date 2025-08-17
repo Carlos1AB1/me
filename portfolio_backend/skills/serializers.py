@@ -6,13 +6,27 @@ class SkillSerializer(serializers.ModelSerializer):
     Serializer para habilidades
     """
     category_name = serializers.CharField(source='category.name', read_only=True)
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Skill
         fields = [
-            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image_url',
+            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image',
             'description', 'years_experience', 'is_featured', 'order'
         ]
+    
+    def get_image(self, obj):
+        """
+        Devuelve la URL completa de la imagen
+        """
+        if obj.image:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.image.url)
+            else:
+                # Fallback para cuando no hay request en el contexto
+                return f"http://127.0.0.1:8000{obj.image.url}"
+        return None
 
 class SkillCategorySerializer(serializers.ModelSerializer):
     """
