@@ -3,73 +3,77 @@
 import { useState, useRef, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import TiltCard from './TiltCard'
+import apiClient from '@/lib/api'
 
 const ProjectsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
+  const [projects, setProjects] = useState<Array<{
+    tag: string;
+    title: string;
+    subtitle: string;
+    price: string;
+    priceSubtext: string;
+    image: string;
+    gradient: string;
+    deviceType: string;
+  }>>([])
+  const [loading, setLoading] = useState(true)
 
-  const projects = [
-    {
-      tag: 'OFFER ELIGIBLE',
-      title: 'E-commerce',
-      subtitle: 'React Intelligence',
-      price: 'From $2499 or $208.25/mo. for 12 mo.*',
-      priceSubtext: 'with development services',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      deviceType: 'laptop'
-    },
-    {
-      tag: 'OFFER ELIGIBLE', 
-      title: 'SaaS Dashboard',
-      subtitle: 'Next.js Intelligence',
-      price: 'From $1899 or $158.25/mo. for 12 mo.*',
-      priceSubtext: 'with development services',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-      deviceType: 'laptop'
-    },
-    {
-      tag: 'OFFER ELIGIBLE',
-      title: 'Mobile App',
-      subtitle: 'React Native Intelligence', 
-      price: 'From $3499 or $291.58/mo. for 12 mo.*',
-      priceSubtext: 'with development services',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-      deviceType: 'phone'
-    },
-    {
-      tag: 'OFFER ELIGIBLE',
-      title: 'Web Application',
-      subtitle: 'Vue.js Intelligence',
-      price: 'From $2199 or $183.25/mo. for 12 mo.*',
-      priceSubtext: 'with development services', 
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-      deviceType: 'laptop'
-    },
-    {
-      tag: 'OFFER ELIGIBLE',
-      title: 'Desktop Software',
-      subtitle: 'Electron Intelligence',
-      price: 'From $2799 or $233.25/mo. for 12 mo.*',
-      priceSubtext: 'with development services',
-      image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-      deviceType: 'desktop'
-    },
-    {
-      tag: 'OFFER ELIGIBLE',
-      title: 'API Development',
-      subtitle: 'Node.js Intelligence',
-      price: 'From $1699 or $141.58/mo. for 12 mo.*',
-      priceSubtext: 'with development services',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop&crop=center',
-      gradient: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-      deviceType: 'laptop'
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        setLoading(true)
+        const projectsData = await apiClient.getFeaturedProjects()
+        
+        // Convertir datos del backend al formato esperado
+        const formattedProjects = projectsData.map((project: any) => ({
+          tag: project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO',
+          title: project.title,
+          subtitle: project.technologies?.join(', ') || 'Ver tecnologías',
+          price: project.github_url ? 'Ver código' : 'Ver proyecto',
+          priceSubtext: project.description || 'Descripción del proyecto',
+          image: project.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center',
+          gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          deviceType: 'laptop'
+        }))
+        
+        setProjects(formattedProjects)
+      } catch (error) {
+        console.error('Error loading projects:', error)
+        // Si hay error, mantener array vacío
+        setProjects([])
+      } finally {
+        setLoading(false)
+      }
     }
+
+    loadProjects()
+  }, [])
+
+  const projects_fallback: Array<{
+    tag: string;
+    title: string;
+    subtitle: string;
+    price: string;
+    priceSubtext: string;
+    image: string;
+    gradient: string;
+    deviceType: string;
+  }> = [
+    // TODO: Agregar tus proyectos reales aquí
+    // Ejemplo de estructura:
+    // {
+    //   tag: 'PROYECTO DESTACADO',
+    //   title: 'Nombre del Proyecto',
+    //   subtitle: 'Tecnología Principal',
+    //   price: 'Información adicional',
+    //   priceSubtext: 'Descripción breve',
+    //   image: 'URL_de_imagen',
+    //   gradient: 'linear-gradient(135deg, #color1 0%, #color2 100%)',
+    //   deviceType: 'laptop' // o 'phone', 'desktop'
+    // }
   ]
 
   useEffect(() => {
@@ -359,7 +363,41 @@ const ProjectsSection = () => {
           }}
           className="projects-scroll"
         >
-          {projects.map((project, index) => (
+          {loading ? (
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              width: '100%', 
+              height: '300px',
+              flexDirection: 'column',
+              gap: '10px'
+            }}>
+              <div style={{ 
+                width: '40px', 
+                height: '40px', 
+                border: '3px solid #f3f3f3', 
+                borderTop: '3px solid #1d6ff2',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }}></div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '14px' }}>Cargando proyectos...</p>
+            </div>
+          ) : projects.length === 0 ? (
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              width: '100%', 
+              height: '300px',
+              flexDirection: 'column',
+              gap: '10px'
+            }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '16px' }}>No hay proyectos disponibles</p>
+              <p style={{ color: 'var(--text-tertiary)', fontSize: '14px' }}>Agrega proyectos en el backend Django</p>
+            </div>
+          ) : (
+            projects.map((project, index) => (
             <TiltCard
               key={index}
               style={{
@@ -458,7 +496,8 @@ const ProjectsSection = () => {
                 </div>
               </div>
             </TiltCard>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>

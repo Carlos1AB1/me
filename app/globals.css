@@ -1027,3 +1027,9 @@ button:focus, a:focus {
 .color-secondary { color: #6e6e73; }
 .color-blue { color: #007aff; }
 .color-link { color: #0066cc; }
+
+/* Loading Animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

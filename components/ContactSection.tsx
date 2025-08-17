@@ -90,9 +90,9 @@ const ContactSection = () => {
               marginBottom: '40px'
             }}>
               {[
-                { icon: Mail, label: 'Email', value: 'hola@tudominio.com', href: 'mailto:hola@tudominio.com' },
-                { icon: Phone, label: 'Teléfono', value: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-                { icon: MapPin, label: 'Ubicación', value: 'Ciudad, País', href: null }
+                { icon: Mail, label: 'Email', value: 'tu@email.com', href: 'mailto:tu@email.com' },
+                { icon: Phone, label: 'Teléfono', value: '+XX (XXX) XXX-XXXX', href: 'tel:+XXXXXXXXXX' },
+                { icon: MapPin, label: 'Ubicación', value: 'Tu Ciudad, Tu País', href: null }
               ].map((contact, index) => (
                 <div key={index} style={{
                   display: 'flex',

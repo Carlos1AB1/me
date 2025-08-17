@@ -8,129 +8,55 @@ import DockIcon from './DockIcon'
 interface SkillsModalProps {
   isOpen: boolean
   onClose: () => void
+  skills?: any[]
 }
 
-const SkillsModal = ({ isOpen, onClose }: SkillsModalProps) => {
-  const skillCategories = [
+const SkillsModal = ({ isOpen, onClose, skills = [] }: SkillsModalProps) => {
+  // Si hay skills del backend, usarlas; si no, usar estructura vacía
+  const skillCategories: Array<{
+    title: string;
+    description: string;
+    skills: Array<{ name: string; level: string }>;
+  }> = skills.length > 0 ? [
     {
-      title: 'Frontend Development',
-      description: 'Creación de interfaces modernas y responsivas',
-      skills: [
-        { name: 'React ⚛️', level: 'Experto' },
-        { name: 'Next.js 🚀', level: 'Experto' },
-        { name: 'TypeScript 📘', level: 'Experto' },
-        { name: 'Vue.js 💚', level: 'Intermedio' },
-        { name: 'HTML5 🌐', level: 'Experto' },
-        { name: 'CSS3 🎨', level: 'Experto' },
-        { name: 'Sass/SCSS 💎', level: 'Experto' },
-        { name: 'Tailwind CSS 🌊', level: 'Intermedio' }
-      ]
-    },
-    {
-      title: 'Backend Development',
-      description: 'APIs robustas y arquitecturas escalables',
-      skills: [
-        { name: 'Node.js 🟢', level: 'Experto' },
-        { name: 'Python 🐍', level: 'Experto' },
-        { name: 'Express.js ⚡', level: 'Experto' },
-        { name: 'Django 🎯', level: 'Intermedio' },
-        { name: 'GraphQL 📊', level: 'Intermedio' },
-        { name: 'REST APIs 🔌', level: 'Experto' },
-        { name: 'Microservices 🧩', level: 'Intermedio' },
-        { name: 'WebSockets ⚡', level: 'Intermedio' }
-      ]
-    },
-    {
-      title: 'Database & Cloud',
-      description: 'Gestión de datos y infraestructura en la nube',
-      skills: [
-        { name: 'MongoDB 🍃', level: 'Experto' },
-        { name: 'PostgreSQL 🐘', level: 'Intermedio' },
-        { name: 'MySQL 🐬', level: 'Intermedio' },
-        { name: 'Redis ⚡', level: 'Intermedio' },
-        { name: 'AWS ☁️', level: 'Intermedio' },
-        { name: 'Docker 🐳', level: 'Intermedio' },
-        { name: 'Kubernetes ⚙️', level: 'Básico' },
-        { name: 'Firebase 🔥', level: 'Experto' }
-      ]
-    },
-    {
-      title: 'Mobile & Tools',
-      description: 'Desarrollo móvil y herramientas de productividad',
-      skills: [
-        { name: 'React Native 📱', level: 'Intermedio' },
-        { name: 'Flutter 🦋', level: 'Básico' },
-        { name: 'Git 📋', level: 'Experto' },
-        { name: 'Webpack 📦', level: 'Intermedio' },
-        { name: 'Jest 🧪', level: 'Experto' },
-        { name: 'Figma 🎨', level: 'Intermedio' },
-        { name: 'VS Code 💻', level: 'Experto' },
-        { name: 'Linux 🐧', level: 'Intermedio' }
-      ]
+      title: 'Habilidades Técnicas',
+      description: 'Tecnologías y herramientas que domino',
+      skills: skills.map((skill: any) => ({
+        name: skill.name,
+        level: skill.level || 'Intermedio'
+      }))
     }
+  ] : [
+    // TODO: Agregar tus categorías de habilidades reales aquí
+    // Ejemplo de estructura:
+    // {
+    //   title: 'Nombre de la Categoría',
+    //   description: 'Descripción de la categoría',
+    //   skills: [
+    //     { name: 'Nombre de la habilidad', level: 'Básico' | 'Intermedio' | 'Experto' },
+    //   ]
+    // }
   ]
 
-  const technologies = [
-    {
-      name: 'React',
-      icon: '⚛️',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-      gradient: 'linear-gradient(135deg, #61dafb 0%, #21759b 100%)'
-    },
-    {
-      name: 'Next.js',
-      icon: '🚀',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
-      gradient: 'linear-gradient(135deg, #000000 0%, #434343 100%)'
-    },
-    {
-      name: 'TypeScript',
-      icon: '📘',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
-      gradient: 'linear-gradient(135deg, #3178c6 0%, #1e40af 100%)'
-    },
-    {
-      name: 'Node.js',
-      icon: '🟢',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-      gradient: 'linear-gradient(135deg, #68d391 0%, #38a169 100%)'
-    },
-    {
-      name: 'Python',
-      icon: '🐍',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
-      gradient: 'linear-gradient(135deg, #3776ab 0%, #ffd43b 100%)'
-    },
-    {
-      name: 'AWS',
-      icon: '☁️',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
-      gradient: 'linear-gradient(135deg, #ff9900 0%, #ec7211 100%)'
-    },
-    {
-      name: 'Docker',
-      icon: '🐳',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
-      gradient: 'linear-gradient(135deg, #2496ed 0%, #0db7ed 100%)'
-    },
-    {
-      name: 'MongoDB',
-      icon: '🍃',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-      gradient: 'linear-gradient(135deg, #47a248 0%, #4caf50 100%)'
-    },
-    {
-      name: 'Git',
-      icon: '📋',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
-      gradient: 'linear-gradient(135deg, #f05032 0%, #ff6b35 100%)'
-    },
-    {
-      name: 'Vue.js',
-      icon: '💚',
-      image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
-      gradient: 'linear-gradient(135deg, #4fc08d 0%, #42b883 100%)'
-    }
+  const technologies: Array<{
+    name: string;
+    icon: string;
+    image: string;
+    gradient: string;
+  }> = skills.length > 0 ? skills.map((skill: any) => ({
+    name: skill.name,
+    icon: skill.icon || '⚡',
+    image: skill.icon || `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase()}/${skill.name.toLowerCase()}-original.svg`,
+    gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)'
+  })) : [
+    // TODO: Debe coincidir con las tecnologías del MacDock principal
+    // Ejemplo de estructura:
+    // {
+    //   name: 'React',
+    //   icon: '⚛️',
+    //   image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+    //   gradient: 'linear-gradient(135deg, #61dafb 0%, #21759b 100%)'
+    // }
   ]
 
   const getSkillColor = (level: string) => {

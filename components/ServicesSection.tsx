@@ -1,58 +1,50 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import TiltCard from './TiltCard'
+import apiClient from '@/lib/api'
+
+interface Service {
+  id: number;
+  title: string;
+  slug: string;
+  category: number;
+  category_name: string;
+  category_icon: string;
+  short_description: string;
+  icon: string;
+  image: string | null;
+  price_type: string;
+  price_display: string;
+  duration: string;
+  duration_display: string;
+  is_featured: boolean;
+  order: number;
+  // Para servicios detallados (si los necesitamos)
+  description?: string;
+  features?: string[];
+}
 
 const ServicesSection = () => {
-  const services = [
-    {
-      icon: '🌐',
-      title: 'Desarrollo Web',
-      description: 'Aplicaciones web modernas y responsivas con React, Next.js y Vue.js',
-      features: ['Frontend Responsivo', 'Backend APIs', 'Bases de Datos', 'Optimización SEO'],
-      price: 'Desde $2,500',
-      duration: '4-8 semanas'
-    },
-    {
-      icon: '📱',
-      title: 'Aplicaciones Móviles',
-      description: 'Apps nativas y multiplataforma con React Native y Flutter',
-      features: ['iOS & Android', 'Push Notifications', 'Offline Support', 'App Store Deploy'],
-      price: 'Desde $3,500',
-      duration: '6-12 semanas'
-    },
-    {
-      icon: '🛠️',
-      title: 'SaaS Solutions',
-      description: 'Plataformas SaaS completas con dashboard administrativo y panel de usuario',
-      features: ['Multi-tenant', 'Subscripciones', 'Analytics', 'API Integration'],
-      price: 'Desde $5,000',
-      duration: '8-16 semanas'
-    },
-    {
-      icon: '⚡',
-      title: 'API Development',
-      description: 'APIs REST y GraphQL escalables con Node.js, Python o PHP',
-      features: ['REST & GraphQL', 'Documentación', 'Testing', 'Cloud Deploy'],
-      price: 'Desde $1,800',
-      duration: '3-6 semanas'
-    },
-    {
-      icon: '☁️',
-      title: 'Cloud & DevOps',
-      description: 'Infraestructura en la nube y automatización de deployments',
-      features: ['AWS/GCP/Azure', 'Docker & K8s', 'CI/CD Pipelines', 'Monitoring'],
-      price: 'Desde $2,200',
-      duration: '2-4 semanas'
-    },
-    {
-      icon: '🎨',
-      title: 'UI/UX Design',
-      description: 'Diseño de interfaces modernas y experiencias de usuario excepcionales',
-      features: ['Wireframes', 'Prototipos', 'Design System', 'User Testing'],
-      price: 'Desde $1,500',
-      duration: '2-6 semanas'
+  const [services, setServices] = useState<Service[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        setLoading(true)
+        const servicesData = await apiClient.getFeaturedServices()
+        setServices(servicesData)
+      } catch (error) {
+        console.error('Error loading services:', error)
+        setServices([])
+      } finally {
+        setLoading(false)
+      }
     }
-  ]
+
+    loadServices()
+  }, [])
 
   return (
     <section 
@@ -94,156 +86,159 @@ const ServicesSection = () => {
         </div>
 
         {/* Services Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: 'clamp(20px, 4vw, 30px)'
-        }}>
-          {services.map((service, index) => (
-            <TiltCard
-              key={index}
-              style={{
-                animationDelay: `${index * 0.1}s`,
-                height: '100%'
-              }}
-            >
-              <div style={{
-                padding: 'clamp(20px, 4vw, 30px)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
-                {/* Service Icon */}
+        {loading ? (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '60px 20px',
+            color: 'var(--text-secondary)'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ 
+                width: '40px', 
+                height: '40px', 
+                border: '3px solid #f3f3f3', 
+                borderTop: '3px solid #1d6ff2',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite',
+                margin: '0 auto 10px'
+              }}></div>
+              <p>Cargando servicios...</p>
+            </div>
+          </div>
+        ) : (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: 'clamp(20px, 4vw, 30px)'
+          }}>
+            {services.map((service, index) => (
+              <TiltCard
+                key={service.id}
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  height: '100%'
+                }}
+              >
                 <div style={{
-                  fontSize: 'clamp(40px, 8vw, 48px)',
-                  marginBottom: '20px',
-                  textAlign: 'center'
-                }}>
-                  {service.icon}
-                </div>
-
-                {/* Service Title */}
-                <h3 style={{
-                  fontSize: 'clamp(20px, 4vw, 24px)',
-                  fontWeight: '600',
-                  marginBottom: '12px',
-                  color: 'var(--text-primary)',
-                  textAlign: 'center'
-                }}>
-                  {service.title}
-                </h3>
-
-                {/* Service Description */}
-                <p style={{
-                  fontSize: '15px',
-                  color: 'var(--text-secondary)',
-                  lineHeight: '1.6',
-                  marginBottom: '20px',
-                  textAlign: 'center',
-                  flex: 1
-                }}>
-                  {service.description}
-                </p>
-
-                {/* Features List */}
-                <div style={{
-                  marginBottom: '24px'
-                }}>
-                  <h4 style={{
-                    fontSize: '14px',
-                    fontWeight: '600',
-                    color: 'var(--text-primary)',
-                    marginBottom: '12px',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}>
-                    Incluye:
-                  </h4>
-                  <ul style={{
-                    listStyle: 'none',
-                    padding: '0',
-                    margin: '0'
-                  }}>
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} style={{
-                        fontSize: '13px',
-                        color: 'var(--text-secondary)',
-                        marginBottom: '6px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px'
-                      }}>
-                        <span style={{
-                          width: '4px',
-                          height: '4px',
-                          borderRadius: '50%',
-                          background: '#1d6ff2',
-                          flexShrink: 0
-                        }} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Price and Duration */}
-                <div style={{
-                  borderTop: '1px solid var(--border-color)',
-                  paddingTop: '20px',
+                  padding: 'clamp(20px, 4vw, 30px)',
+                  height: '100%',
                   display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
+                  flexDirection: 'column'
                 }}>
-                  <div>
-                    <div style={{
-                      fontSize: '18px',
-                      fontWeight: '600',
-                      color: '#1d6ff2',
-                      marginBottom: '2px'
-                    }}>
-                      {service.price}
-                    </div>
-                    <div style={{
-                      fontSize: '12px',
-                      color: 'var(--text-secondary)'
-                    }}>
-                      {service.duration}
-                    </div>
-                  </div>
-                  <button style={{
-                    background: '#1d6ff2',
-                    color: 'white',
-                    border: 'none',
-                    padding: '8px 16px',
-                    borderRadius: '20px',
-                    fontSize: '12px',
-                    fontWeight: '500',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = '#1557c7'
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = '#1d6ff2'
-                  }}
-                  onClick={() => {
-                    // Scroll to contact section
-                    const contactElement = document.getElementById('contacto')
-                    if (contactElement) {
-                      contactElement.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start'
-                      })
-                    }
+                  {/* Service Icon */}
+                  <div style={{
+                    fontSize: 'clamp(40px, 8vw, 48px)',
+                    marginBottom: '20px',
+                    textAlign: 'center'
                   }}>
-                    Contratar
-                  </button>
+                    {service.icon}
+                  </div>
+
+                  {/* Service Title */}
+                  <h3 style={{
+                    fontSize: 'clamp(20px, 4vw, 24px)',
+                    fontWeight: '600',
+                    marginBottom: '12px',
+                    color: 'var(--text-primary)',
+                    textAlign: 'center'
+                  }}>
+                    {service.title}
+                  </h3>
+
+                  {/* Service Description */}
+                  <p style={{
+                    fontSize: '15px',
+                    color: 'var(--text-secondary)',
+                    lineHeight: '1.6',
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                    flex: 1
+                  }}>
+                    {service.short_description}
+                  </p>
+
+                  {/* Category Badge */}
+                  <div style={{
+                    marginBottom: '24px',
+                    textAlign: 'center'
+                  }}>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '12px',
+                      fontWeight: '500',
+                      color: 'var(--text-secondary)',
+                      background: 'var(--bg-secondary)',
+                      padding: '4px 12px',
+                      borderRadius: '12px',
+                      border: '1px solid var(--border-color)'
+                    }}>
+                      {service.category_icon} {service.category_name}
+                    </span>
+                  </div>
+
+                  {/* Price and Duration */}
+                  <div style={{
+                    borderTop: '1px solid var(--border-color)',
+                    paddingTop: '20px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <div>
+                      <div style={{
+                        fontSize: '18px',
+                        fontWeight: '600',
+                        color: '#1d6ff2',
+                        marginBottom: '2px'
+                      }}>
+                        {service.price_display}
+                      </div>
+                      <div style={{
+                        fontSize: '12px',
+                        color: 'var(--text-secondary)'
+                      }}>
+                        {service.duration_display}
+                      </div>
+                    </div>
+                    <button style={{
+                      background: '#1d6ff2',
+                      color: 'white',
+                      border: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '20px',
+                      fontSize: '12px',
+                      fontWeight: '500',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.background = '#1557c7'
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.background = '#1d6ff2'
+                    }}
+                    onClick={() => {
+                      // Scroll to contact section
+                      const contactElement = document.getElementById('contacto')
+                      if (contactElement) {
+                        contactElement.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start'
+                        })
+                      }
+                    }}>
+                      Contratar
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </TiltCard>
-          ))}
-        </div>
+              </TiltCard>
+            ))}
+          </div>
+        )}
 
         {/* CTA Section */}
         <div style={{
