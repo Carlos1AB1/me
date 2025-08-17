@@ -41,6 +41,25 @@ class Skill(models.Model):
         help_text='Color hexadecimal para el fondo del ícono (ej: #74b9ff)', 
         verbose_name='Color'
     )
+    gradient_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('linear-left', 'Degradado Horizontal (Izq → Der)'),
+            ('linear-right', 'Degradado Horizontal (Der → Izq)'),
+            ('linear-top', 'Degradado Vertical (Arriba → Abajo)'),
+            ('linear-bottom', 'Degradado Vertical (Abajo → Arriba)'),
+            ('linear-diagonal-1', 'Degradado Diagonal (↘)'),
+            ('linear-diagonal-2', 'Degradado Diagonal (↙)'),
+            ('linear-diagonal-3', 'Degradado Diagonal (↗)'),
+            ('linear-diagonal-4', 'Degradado Diagonal (↖)'),
+            ('radial-center', 'Degradado Radial (Centro)'),
+            ('radial-corner', 'Degradado Radial (Esquina)'),
+            ('conic', 'Degradado Cónico'),
+            ('solid', 'Color Sólido'),
+        ],
+        default='linear-diagonal-1',
+        verbose_name='Tipo de Degradado'
+    )
     description = models.TextField(blank=True, verbose_name='Descripción')
     years_experience = models.PositiveIntegerField(default=0, verbose_name='Años de experiencia')
     is_featured = models.BooleanField(default=False, verbose_name='Destacada')

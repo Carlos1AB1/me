@@ -7,7 +7,9 @@ interface MacDockProps {
   technologies: Array<{
     name: string
     icon: string
-    gradient: string
+    image?: string
+    color: string
+    gradient_type: string
   }>
   onClick?: () => void
 }

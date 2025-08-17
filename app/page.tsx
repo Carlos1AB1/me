@@ -21,8 +21,9 @@ export default function Home() {
   const [technologies, setTechnologies] = useState<Array<{
     name: string;
     icon: string;
-    image: string;
-    gradient: string;
+    image?: string;
+    color: string;
+    gradient_type: string;
   }>>([])
 
   useEffect(() => {
@@ -37,8 +38,9 @@ export default function Home() {
         const techData = skillsData.map((skill: any) => ({
           name: skill.name,
           icon: skill.icon || '⚡',
-          image: skill.image || skill.icon || `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase()}/${skill.name.toLowerCase()}-original.svg`,
-          gradient: `linear-gradient(135deg, ${skill.color || '#74b9ff'} 0%, ${skill.color || '#0984e3'} 100%)`
+          image: skill.image,
+          color: skill.color || '#74b9ff',
+          gradient_type: skill.gradient_type || 'linear-diagonal-1'
         }))
         
         setTechnologies(techData)
