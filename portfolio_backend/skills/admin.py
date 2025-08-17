@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import mark_safe
 from django.utils.safestring import mark_safe
-from core.widgets import ImagePreviewWidget
+from core.widgets import ImagePreviewWidget, ColorPickerWidget
 from .models import SkillCategory, Skill
 
 @admin.register(SkillCategory)
@@ -38,10 +38,12 @@ class SkillAdmin(admin.ModelAdmin):
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
-        Personalizar el widget para el campo imagen
+        Personalizar el widget para campos específicos
         """
         if db_field.name == 'image':
             kwargs['widget'] = ImagePreviewWidget
+        elif db_field.name == 'color':
+            kwargs['widget'] = ColorPickerWidget
         return super().formfield_for_dbfield(db_field, **kwargs)
     
     fieldsets = (
@@ -49,7 +51,7 @@ class SkillAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image', 'image_preview')
+            'fields': ('icon', 'image', 'image_preview', 'color')
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')

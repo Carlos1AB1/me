@@ -35,6 +35,12 @@ class Skill(models.Model):
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES, verbose_name='Nivel')
     icon = models.CharField(max_length=50, blank=True, help_text='Emoji o clase CSS', verbose_name='Icono')
     image = models.ImageField(upload_to='skills/', blank=True, null=True, verbose_name='Imagen')
+    color = models.CharField(
+        max_length=7, 
+        default='#74b9ff', 
+        help_text='Color hexadecimal para el fondo del ícono (ej: #74b9ff)', 
+        verbose_name='Color'
+    )
     description = models.TextField(blank=True, verbose_name='Descripción')
     years_experience = models.PositiveIntegerField(default=0, verbose_name='Años de experiencia')
     is_featured = models.BooleanField(default=False, verbose_name='Destacada')

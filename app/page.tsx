@@ -37,8 +37,8 @@ export default function Home() {
         const techData = skillsData.map((skill: any) => ({
           name: skill.name,
           icon: skill.icon || '⚡',
-          image: skill.icon || `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase()}//${skill.name.toLowerCase()}-original.svg`,
-          gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)'
+          image: skill.image || skill.icon || `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase()}/${skill.name.toLowerCase()}-original.svg`,
+          gradient: `linear-gradient(135deg, ${skill.color || '#74b9ff'} 0%, ${skill.color || '#0984e3'} 100%)`
         }))
         
         setTechnologies(techData)
