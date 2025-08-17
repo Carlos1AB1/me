@@ -65,6 +65,16 @@ class Skill(models.Model):
         verbose_name='CSS del Degradado Personalizado',
         help_text='Ejemplo: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%). Si está vacío, se usará el color y tipo seleccionados arriba.'
     )
+    background_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('transparent', 'Sin Fondo (Transparente)'),
+            ('solid', 'Color Sólido'),
+            ('gradient', 'Degradado'),
+        ],
+        default='gradient',
+        verbose_name='Tipo de Fondo'
+    )
     description = models.TextField(blank=True, verbose_name='Descripción')
     years_experience = models.PositiveIntegerField(default=0, verbose_name='Años de experiencia')
     is_featured = models.BooleanField(default=False, verbose_name='Destacada')
@@ -75,7 +85,7 @@ class Skill(models.Model):
     class Meta:
         verbose_name = 'Habilidad'
         verbose_name_plural = 'Habilidades'
-        ordering = ['category', 'order', 'name']
+        ordering = ['order', '-created_at', 'category', 'name']  # Orden manual primero, luego fecha
         unique_together = ['name', 'category']
 
     def __str__(self):

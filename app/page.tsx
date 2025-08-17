@@ -25,6 +25,7 @@ export default function Home() {
     color: string;
     gradient_type: string;
     gradient_css?: string;
+    background_type?: string;
   }>>([])
 
   useEffect(() => {
@@ -43,7 +44,8 @@ export default function Home() {
           image: skill.image,
           color: skill.color || '#74b9ff',
           gradient_type: skill.gradient_type || 'linear-diagonal-1',
-          gradient_css: skill.gradient_css || null
+          gradient_css: skill.gradient_css || null,
+          background_type: skill.background_type || 'gradient'
         }))
         
         console.log('Tech data processed:', techData) // Debug log
@@ -56,19 +58,22 @@ export default function Home() {
             name: 'React',
             icon: '⚛️',
             color: '#61DAFB',
-            gradient_type: 'linear-diagonal-1'
+            gradient_type: 'linear-diagonal-1',
+            background_type: 'gradient'
           },
           {
             name: 'Next.js',
             icon: '🔺',
             color: '#000000',
-            gradient_type: 'linear-diagonal-2'
+            gradient_type: 'linear-diagonal-2',
+            background_type: 'solid'
           },
           {
             name: 'TypeScript',
             icon: '📘',
             color: '#3178C6',
-            gradient_type: 'radial-center'
+            gradient_type: 'radial-center',
+            background_type: 'transparent'
           }
         ]
         setTechnologies(fallbackTechnologies)

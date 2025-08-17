@@ -58,7 +58,7 @@ class SkillAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image', 'image_preview', 'color', 'gradient_type', 'gradient_css')
+            'fields': ('icon', 'image', 'image_preview', 'background_type', 'color', 'gradient_type', 'gradient_css')
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')

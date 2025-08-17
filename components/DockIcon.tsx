@@ -11,6 +11,7 @@ interface DockIconProps {
     color: string
     gradient_type: string
     gradient_css?: string
+    background_type?: string
   }
   mouseX: any
 }
@@ -21,8 +22,31 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   // Detectar si es móvil
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 480
 
-  // Usar el degradado personalizado del admin o color sólido como fallback
-  const backgroundStyle = tech.gradient_css || tech.color || '#74b9ff'
+  // Determinar el estilo de fondo basado en la configuración
+  const getBackgroundStyle = () => {
+    const backgroundType = tech.background_type || 'gradient'
+    
+    switch (backgroundType) {
+      case 'transparent':
+        return 'transparent'
+      case 'solid':
+        return tech.color || '#74b9ff'
+      case 'gradient':
+        return tech.gradient_css || tech.color || '#74b9ff'
+      default:
+        return tech.color || '#74b9ff'
+    }
+  }
+  
+  const backgroundStyle = getBackgroundStyle()
+  
+  // Ajustar color del texto basado en el tipo de fondo
+  const getTextColor = () => {
+    if (tech.background_type === 'transparent') {
+      return 'var(--text-primary)' // Usar color del tema
+    }
+    return tech.name === 'TypeScript' ? '#1d1d1f' : 'white'
+  }
 
   const distance = useTransform(mouseX, (val: number) => {
     if (isMobile) return 100 // Desactivar magnification en móviles
@@ -30,17 +54,17 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
     return val - bounds.x - bounds.width / 2
   })
 
-  // Efecto de magnificación (desactivado en móviles)
-  const widthSync = useTransform(distance, [-150, 0, 150], isMobile ? [80, 80, 80] : [80, 120, 80])
+  // Efecto de magnificación (tamaños más grandes)
+  const widthSync = useTransform(distance, [-150, 0, 150], isMobile ? [100, 100, 100] : [100, 140, 100])
   const width = useSpring(widthSync, { mass: 0.1, stiffness: 200, damping: 15 })
 
-  const heightSync = useTransform(distance, [-150, 0, 150], isMobile ? [80, 80, 80] : [80, 120, 80])
+  const heightSync = useTransform(distance, [-150, 0, 150], isMobile ? [100, 100, 100] : [100, 140, 100])
   const height = useSpring(heightSync, { mass: 0.1, stiffness: 200, damping: 15 })
 
-  const iconSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [40, 40, 40] : [40, 60, 40])
+  const iconSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [50, 50, 50] : [50, 70, 50])
   const iconSize = useSpring(iconSizeSync, { mass: 0.1, stiffness: 200, damping: 15 })
 
-  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [12, 12, 12] : [12, 14, 12])
+  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [14, 14, 14] : [14, 16, 14])
   const textSize = useSpring(textSizeSync, { mass: 0.1, stiffness: 200, damping: 15 })
 
   return (
@@ -52,8 +76,8 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        height: '180px',
-        minWidth: '120px',
+        height: '200px',
+        minWidth: '140px',
         paddingBottom: '20px'
       }}
     >
@@ -66,7 +90,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: tech.name === 'TypeScript' ? '#1d1d1f' : 'white',
+          color: getTextColor(),
           fontSize: iconSize,
           cursor: 'pointer',
           position: 'relative',
@@ -84,10 +108,9 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
             src={tech.image} 
             alt={tech.name}
             style={{
-              width: '70%',
-              height: '70%',
-              objectFit: 'contain',
-              filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+              width: '75%',
+              height: '75%',
+              objectFit: 'contain'
             }}
           />
         ) : (
@@ -115,12 +138,12 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
       <motion.span
         style={{
           fontSize: textSize,
-          fontWeight: '400',
+          fontWeight: '500',
           textAlign: 'center',
           color: 'var(--text-primary)',
           transition: 'color 0.3s ease',
           whiteSpace: 'nowrap',
-          maxWidth: '120px',
+          maxWidth: '140px',
           overflow: 'hidden',
           textOverflow: 'ellipsis'
         }}

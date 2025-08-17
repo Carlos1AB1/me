@@ -11,6 +11,7 @@ interface MacDockProps {
     color: string
     gradient_type: string
     gradient_css?: string
+    background_type?: string
   }>
   onClick?: () => void
 }
@@ -29,10 +30,10 @@ const MacDock = ({ technologies, onClick }: MacDockProps) => {
       style={{
         cursor: onClick ? 'pointer' : 'default',
         display: 'flex',
-        height: isMobile ? '120px' : '140px',
+        height: isMobile ? '140px' : '160px',
         alignItems: 'end',
-        gap: isMobile ? '4px' : '6px',
-        padding: isMobile ? '12px 16px' : '16px 20px',
+        gap: isMobile ? '6px' : '8px',
+        padding: isMobile ? '14px 18px' : '18px 24px',
         background: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(20px)',
         borderRadius: isMobile ? '20px' : '24px',

@@ -11,7 +11,7 @@ class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
         fields = [
-            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image', 'color', 'gradient_type', 'gradient_css',
+            'id', 'name', 'category', 'category_name', 'level', 'icon', 'image', 'color', 'gradient_type', 'gradient_css', 'background_type',
             'description', 'years_experience', 'is_featured', 'order'
         ]
     
