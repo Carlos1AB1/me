@@ -27,7 +27,7 @@ const Hero = () => {
             color: 'var(--text-primary)',
             transition: 'color 0.3s ease'
           }}>
-          <span style={{ color: 'var(--link-color)' }}>Tu Nombre</span> Tu Título
+          <span style={{ color: 'var(--link-color)' }}>Carlos Arturo B.</span> Estudiante
         </h1>
         <h1 
           className="hero-subtitle"
@@ -39,7 +39,7 @@ const Hero = () => {
             color: 'var(--text-secondary)',
             transition: 'color 0.3s ease'
           }}>
-          Tu Descripción Profesional.
+          ingeniería de software. 
         </h1>
       </section>
     </main>
