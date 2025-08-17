@@ -8,8 +8,18 @@ export interface GradientConfig {
 
 // Función para generar un color más claro u oscuro
 function adjustBrightness(hex: string, percent: number): string {
+  // Validar que hex sea un string válido
+  if (!hex || typeof hex !== 'string') {
+    hex = '#74b9ff' // Color por defecto
+  }
+  
   // Remover el # si existe
   hex = hex.replace('#', '')
+  
+  // Validar que sea un color hexadecimal válido
+  if (!/^[0-9A-Fa-f]{6}$/.test(hex)) {
+    hex = '74b9ff' // Color por defecto sin #
+  }
   
   // Convertir a RGB
   const num = parseInt(hex, 16)
@@ -44,9 +54,14 @@ function generateComplementaryColors(baseColor: string) {
 // Función principal para generar degradados
 export function generateGradient(config: GradientConfig): string {
   const { baseColor, gradientType } = config
-  const colors = generateComplementaryColors(baseColor)
   
-  switch (gradientType) {
+  // Validar que baseColor sea válido
+  const validColor = baseColor && typeof baseColor === 'string' ? baseColor : '#74b9ff'
+  const validGradientType = gradientType && typeof gradientType === 'string' ? gradientType : 'linear-diagonal-1'
+  
+  const colors = generateComplementaryColors(validColor)
+  
+  switch (validGradientType) {
     case 'linear-left':
       return `linear-gradient(90deg, ${colors.base} 0%, ${colors.lighter} 100%)`
     
@@ -109,11 +124,16 @@ export const SPECIAL_GRADIENTS: Record<string, string> = {
 
 // Función para obtener degradado (especial o generado)
 export function getSkillGradient(skillName: string, color: string, gradientType: string): string {
+  // Validar parámetros de entrada
+  const validSkillName = skillName || 'Default'
+  const validColor = color && typeof color === 'string' ? color : '#74b9ff'
+  const validGradientType = gradientType && typeof gradientType === 'string' ? gradientType : 'linear-diagonal-1'
+  
   // Verificar si hay un degradado especial para esta habilidad
-  if (SPECIAL_GRADIENTS[skillName]) {
-    return SPECIAL_GRADIENTS[skillName]
+  if (SPECIAL_GRADIENTS[validSkillName]) {
+    return SPECIAL_GRADIENTS[validSkillName]
   }
   
   // Generar degradado basado en configuración
-  return generateGradient({ baseColor: color, gradientType })
+  return generateGradient({ baseColor: validColor, gradientType: validGradientType })
 }

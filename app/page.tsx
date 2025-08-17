@@ -32,22 +32,44 @@ export default function Home() {
         setLoading(true)
         // Cargar habilidades del backend
         const skillsData = await apiClient.getFeaturedSkills()
+        console.log('Skills data received:', skillsData) // Debug log
         setSkills(skillsData)
         
         // Convertir habilidades a formato de tecnologías para el MacDock
         const techData = skillsData.map((skill: any) => ({
-          name: skill.name,
+          name: skill.name || 'Unknown',
           icon: skill.icon || '⚡',
           image: skill.image,
           color: skill.color || '#74b9ff',
           gradient_type: skill.gradient_type || 'linear-diagonal-1'
         }))
         
+        console.log('Tech data processed:', techData) // Debug log
         setTechnologies(techData)
       } catch (error) {
         console.error('Error loading skills:', error)
         // Si hay error, usar datos de fallback
-        setTechnologies([])
+        const fallbackTechnologies = [
+          {
+            name: 'React',
+            icon: '⚛️',
+            color: '#61DAFB',
+            gradient_type: 'linear-diagonal-1'
+          },
+          {
+            name: 'Next.js',
+            icon: '🔺',
+            color: '#000000',
+            gradient_type: 'linear-diagonal-2'
+          },
+          {
+            name: 'TypeScript',
+            icon: '📘',
+            color: '#3178C6',
+            gradient_type: 'radial-center'
+          }
+        ]
+        setTechnologies(fallbackTechnologies)
       } finally {
         setLoading(false)
       }

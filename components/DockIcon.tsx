@@ -21,8 +21,12 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   // Detectar si es móvil
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 480
 
-  // Generar el degradado dinámico
-  const dynamicGradient = getSkillGradient(tech.name, tech.color, tech.gradient_type)
+  // Generar el degradado dinámico con validación
+  const dynamicGradient = getSkillGradient(
+    tech.name || 'Default',
+    tech.color || '#74b9ff',
+    tech.gradient_type || 'linear-diagonal-1'
+  )
 
   const distance = useTransform(mouseX, (val: number) => {
     if (isMobile) return 100 // Desactivar magnification en móviles

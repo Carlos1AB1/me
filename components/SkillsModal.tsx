@@ -12,6 +12,9 @@ interface SkillsModalProps {
 }
 
 const SkillsModal = ({ isOpen, onClose, skills = [] }: SkillsModalProps) => {
+  // Debug log para ver los datos que llegan
+  console.log('SkillsModal received skills:', skills)
+  
   // Si hay skills del backend, usarlas; si no, usar estructura vacía
   const skillCategories: Array<{
     title: string;
@@ -41,23 +44,39 @@ const SkillsModal = ({ isOpen, onClose, skills = [] }: SkillsModalProps) => {
   const technologies: Array<{
     name: string;
     icon: string;
-    image: string;
-    gradient: string;
+    image?: string;
+    color: string;
+    gradient_type: string;
   }> = skills.length > 0 ? skills.map((skill: any) => ({
     name: skill.name,
     icon: skill.icon || '⚡',
-    image: skill.icon || `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${skill.name.toLowerCase()}/${skill.name.toLowerCase()}-original.svg`,
-    gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)'
+    image: skill.image,
+    color: skill.color || '#74b9ff',
+    gradient_type: skill.gradient_type || 'linear-diagonal-1'
   })) : [
-    // TODO: Debe coincidir con las tecnologías del MacDock principal
-    // Ejemplo de estructura:
-    // {
-    //   name: 'React',
-    //   icon: '⚛️',
-    //   image: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    //   gradient: 'linear-gradient(135deg, #61dafb 0%, #21759b 100%)'
-    // }
+    // Datos de fallback
+    {
+      name: 'React',
+      icon: '⚛️',
+      color: '#61DAFB',
+      gradient_type: 'linear-diagonal-1'
+    },
+    {
+      name: 'Next.js',
+      icon: '🔺',
+      color: '#000000',
+      gradient_type: 'linear-diagonal-2'
+    },
+    {
+      name: 'TypeScript',
+      icon: '📘',
+      color: '#3178C6',
+      gradient_type: 'radial-center'
+    }
   ]
+  
+  // Debug log para ver las tecnologías procesadas
+  console.log('SkillsModal technologies:', technologies)
 
   const getSkillColor = (level: string) => {
     if (level === 'Experto') return '#00d084'
