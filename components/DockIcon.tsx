@@ -8,6 +8,8 @@ interface DockIconProps {
     name: string
     icon: string
     image?: string
+    sub_icon?: string
+    sub_image?: string
     color: string
     gradient_type: string
     gradient_css?: string
@@ -115,6 +117,45 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
           />
         ) : (
           tech.icon
+        )}
+        
+        {/* Sub-ícono flotante */}
+        {(tech.sub_image || tech.sub_icon) && (
+          <motion.div
+            style={{
+              position: 'absolute',
+              bottom: '-2px',
+              right: '-2px',
+              width: '28px',
+              height: '28px',
+              background: 'rgba(255, 255, 255, 0.95)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '14px',
+              border: '2px solid rgba(255, 255, 255, 0.8)',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2)',
+              zIndex: 10
+            }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 300, damping: 20 }}
+          >
+            {tech.sub_image ? (
+              <img 
+                src={tech.sub_image} 
+                alt={`${tech.name} framework`}
+                style={{
+                  width: '18px',
+                  height: '18px',
+                  objectFit: 'contain'
+                }}
+              />
+            ) : (
+              <span style={{ fontSize: '12px' }}>{tech.sub_icon}</span>
+            )}
+          </motion.div>
         )}
         
         {/* Efecto de brillo */}

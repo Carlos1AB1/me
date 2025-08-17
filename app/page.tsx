@@ -22,6 +22,8 @@ export default function Home() {
     name: string;
     icon: string;
     image?: string;
+    sub_icon?: string;
+    sub_image?: string;
     color: string;
     gradient_type: string;
     gradient_css?: string;
@@ -42,6 +44,8 @@ export default function Home() {
           name: skill.name || 'Unknown',
           icon: skill.icon || '⚡',
           image: skill.image,
+          sub_icon: skill.sub_icon,
+          sub_image: skill.sub_image,
           color: skill.color || '#74b9ff',
           gradient_type: skill.gradient_type || 'linear-diagonal-1',
           gradient_css: skill.gradient_css || null,
@@ -55,16 +59,18 @@ export default function Home() {
         // Si hay error, usar datos de fallback simples
         const fallbackTechnologies = [
           {
-            name: 'React',
-            icon: '⚛️',
-            color: '#61DAFB',
+            name: 'Java',
+            icon: '☕',
+            sub_icon: '🍃', // Spring
+            color: '#ED8B00',
             gradient_type: 'linear-diagonal-1',
             background_type: 'gradient'
           },
           {
-            name: 'Next.js',
-            icon: '🔺',
-            color: '#000000',
+            name: 'Python',
+            icon: '�',
+            sub_icon: '🌿', // Django
+            color: '#3776AB',
             gradient_type: 'linear-diagonal-2',
             background_type: 'solid'
           },

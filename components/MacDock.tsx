@@ -8,6 +8,8 @@ interface MacDockProps {
     name: string
     icon: string
     image?: string
+    sub_icon?: string
+    sub_image?: string
     color: string
     gradient_type: string
     gradient_css?: string

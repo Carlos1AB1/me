@@ -43,6 +43,8 @@ class SkillAdmin(admin.ModelAdmin):
         """
         if db_field.name == 'image':
             kwargs['widget'] = ImagePreviewWidget
+        elif db_field.name == 'sub_image':
+            kwargs['widget'] = ImagePreviewWidget
         elif db_field.name == 'color':
             kwargs['widget'] = ColorPickerWidget
         elif db_field.name == 'gradient_css':
@@ -58,7 +60,7 @@ class SkillAdmin(admin.ModelAdmin):
             'fields': ('name', 'category', 'level', 'description')
         }),
         ('Visualización', {
-            'fields': ('icon', 'image', 'image_preview', 'background_type', 'color', 'gradient_type', 'gradient_css')
+            'fields': ('icon', 'image', 'image_preview', 'sub_icon', 'sub_image', 'background_type', 'color', 'gradient_type', 'gradient_css')
         }),
         ('Configuración', {
             'fields': ('years_experience', 'is_featured', 'order')
