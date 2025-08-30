@@ -5,8 +5,8 @@
 const Header = () => {
   const navItems = [
     { name: 'Inicio', href: '/', type: 'link' },
-    { name: 'Github', href: 'https://github.com/tu-usuario', type: 'external' },
-    { name: 'Linkedin', href: 'https://linkedin.com/in/tu-perfil', type: 'external' },
+    { name: 'Github', href: 'https://github.com/Carlos1AB1', type: 'external' },
+    { name: 'Linkedin', href: 'https://www.linkedin.com/in/carlos-arturo-baron-estrada-58b90a359/', type: 'external' },
   // ...eliminado: Habilidades...
     { name: 'Servicios', href: '/#servicios', type: 'scroll' },
     { name: 'Blog', href: '/blog', type: 'link' },
