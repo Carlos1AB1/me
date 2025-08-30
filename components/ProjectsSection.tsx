@@ -1,7 +1,8 @@
 'use client'
 
+
 import { useState, useRef, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, X, ArrowLeft, ArrowRight, Github } from 'lucide-react'
 import TiltCard from './TiltCard'
 import apiClient from '@/lib/api'
 
@@ -9,16 +10,11 @@ const ProjectsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
-  const [projects, setProjects] = useState<Array<{
-    tag: string;
-    title: string;
-    subtitle: string;
-    price: string;
-    priceSubtext: string;
-    image: string;
-    gradient: string;
-    deviceType: string;
-  }>>([])
+  const [projects, setProjects] = useState<any[]>([])
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalImages, setModalImages] = useState<string[]>([])
+  const [modalProject, setModalProject] = useState<any>(null)
+  const [modalIndex, setModalIndex] = useState(0)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -28,18 +24,8 @@ const ProjectsSection = () => {
         const projectsData = await apiClient.getFeaturedProjects()
         
         // Convertir datos del backend al formato esperado
-        const formattedProjects = projectsData.map((project: any) => ({
-          tag: project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO',
-          title: project.title,
-          subtitle: project.technologies?.join(', ') || 'Ver tecnologías',
-          price: project.github_url ? 'Ver código' : 'Ver proyecto',
-          priceSubtext: project.description || 'Descripción del proyecto',
-          image: project.image || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center',
-          gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-          deviceType: 'laptop'
-        }))
-        
-        setProjects(formattedProjects)
+  // El backend ya devuelve project.images (array de objetos con image y order)
+  setProjects(projectsData)
       } catch (error) {
         console.error('Error loading projects:', error)
         // Si hay error, mantener array vacío
@@ -114,142 +100,17 @@ const ProjectsSection = () => {
     }
   }
 
-  const renderDevice = (project: any) => {
-    if (project.deviceType === 'phone') {
-      return (
-        <div style={{
-          position: 'relative',
-          width: '100px',
-          height: '180px',
-          margin: '0 auto'
-        }}>
-          {/* Phone Frame */}
-          <div style={{
-            width: '100px',
-            height: '180px',
-            background: '#1a1a1a',
-            borderRadius: '20px',
-            padding: '10px 6px',
-            border: '2px solid #333',
-            position: 'relative'
-          }}>
-            {/* Screen */}
-            <div style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '14px',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <img 
-                src={project.image}
-                alt={project.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '14px'
-                }}
-              />
-              {/* Screen reflection */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
-                borderRadius: '14px'
-              }} />
-            </div>
-            {/* Home indicator */}
-            <div style={{
-              position: 'absolute',
-              bottom: '3px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '35px',
-              height: '2px',
-              background: '#666',
-              borderRadius: '1px'
-            }} />
-          </div>
-        </div>
-      )
-    }
 
-    // Laptop/Desktop
-    return (
-      <div style={{
-        position: 'relative',
-        width: '180px',
-        height: '130px',
-        margin: '0 auto'
-      }}>
-        {/* Screen */}
-        <div style={{
-          width: '180px',
-          height: '110px',
-          background: '#1a1a1a',
-          borderRadius: '6px 6px 0 0',
-          border: '2px solid #333',
-          borderBottom: 'none',
-          padding: '6px',
-          position: 'relative'
-        }}>
-          <div style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '3px',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <img 
-              src={project.image}
-              alt={project.title}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '3px'
-              }}
-            />
-            {/* Screen reflection */}
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)',
-              borderRadius: '3px'
-            }} />
-          </div>
-        </div>
-        
-        {/* Base */}
-        <div style={{
-          width: '180px',
-          height: '10px',
-          background: 'linear-gradient(to bottom, #e8e8e8, #d0d0d0)',
-          borderRadius: '0 0 6px 6px',
-          position: 'relative'
-        }}>
-          {/* Notch */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-6px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '35px',
-            height: '6px',
-            background: 'linear-gradient(to bottom, #d0d0d0, #c0c0c0)',
-            borderRadius: '0 0 3px 3px'
-          }} />
-        </div>
-      </div>
-    )
+  // Modal handlers
+  const openModal = (project: any) => {
+    setModalProject(project)
+    setModalImages((project.images || []).map((img: any) => img.image))
+    setModalIndex(0)
+    setModalOpen(true)
   }
+  const closeModal = () => setModalOpen(false)
+  const prevImage = () => setModalIndex(i => (i > 0 ? i - 1 : modalImages.length - 1))
+  const nextImage = () => setModalIndex(i => (i < modalImages.length - 1 ? i + 1 : 0))
 
   return (
     <section 
@@ -408,14 +269,15 @@ const ProjectsSection = () => {
                 animationDelay: `${index * 0.1}s`,
                 flexShrink: 0
               }}
-              onClick={() => console.log(`Clicked on ${project.title}`)}
+              onClick={() => openModal(project)}
             >
               <div style={{
                 padding: '24px',
                 position: 'relative',
                 height: '100%',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                cursor: 'pointer'
               }}>
                 {/* Tag */}
                 <div style={{
@@ -431,7 +293,7 @@ const ProjectsSection = () => {
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px'
                 }}>
-                  {project.tag}
+                  {project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
                 </div>
 
                 {/* Graduation cap icon */}
@@ -442,7 +304,7 @@ const ProjectsSection = () => {
                   fontSize: '20px',
                   color: 'var(--text-secondary)'
                 }}>
-                  🎓
+                  👨‍💻
                 </div>
 
                 {/* Title */}
@@ -463,36 +325,78 @@ const ProjectsSection = () => {
                   fontWeight: '400',
                   marginBottom: '16px'
                 }}>
-                  {project.subtitle}<sup>Δ</sup>
+                  {(project.technologies_list || project.technologies || []).join(', ')}<sup>Δ</sup>
                 </div>
 
-                {/* Price */}
-                <div style={{
-                  fontSize: '17px',
-                  color: 'var(--text-primary)',
-                  marginBottom: '4px'
-                }}>
-                  {project.price}
-                </div>
-                
+                {/* GitHub link */}
+                {project.github_url && (
+                  <a
+                    href={project.github_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      color: 'var(--text-primary, #fff)',
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      marginBottom: '8px',
+                      textDecoration: 'none',
+                      transition: 'color 0.2s'
+                    }}
+                    onClick={e => e.stopPropagation()}
+                  >
+                    <Github size={18} /> Código fuente
+                  </a>
+                )}
+
+                {/* Description */}
                 <div style={{
                   fontSize: '17px',
                   color: 'var(--text-primary)',
                   marginBottom: '24px'
                 }}>
-                  {project.priceSubtext}
+                  {project.description}
                 </div>
 
-                {/* Device Image */}
+                {/* Imagen principal */}
                 <div style={{
                   height: '220px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   marginTop: 'auto',
-                  overflow: 'hidden'
+                  overflow: 'hidden',
+                  borderRadius: '12px',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.08)'
                 }}>
-                  {renderDevice(project)}
+                  {project.images && project.images.length > 0 ? (
+                    <img
+                      src={project.images[0].image}
+                      alt={project.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        borderRadius: '12px',
+                        transition: 'transform 0.2s',
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: '100%',
+                      height: '100%',
+                      background: '#eaeaea',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#aaa',
+                      fontSize: '16px',
+                    }}>
+                      Sin imagen
+                    </div>
+                  )}
                 </div>
               </div>
             </TiltCard>
@@ -500,7 +404,184 @@ const ProjectsSection = () => {
           )}
         </div>
       </div>
-    </section>
+    {/* Modal popup galería */}
+    {modalOpen && modalProject && (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        background: 'rgba(20,20,30,0.35)',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        animation: 'fadeIn 0.2s',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        transition: 'background 0.2s',
+      }}
+        onClick={closeModal}
+      >
+        <div
+          style={{
+            background: 'var(--card-bg, #181824)',
+            color: 'var(--text-primary, #fff)',
+            borderRadius: '16px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+            padding: '32px 24px',
+            minWidth: '340px',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            position: 'relative',
+            transition: 'background 0.2s, color 0.2s',
+          }}
+          onClick={e => e.stopPropagation()}
+        >
+          {/* Cerrar */}
+          <button
+            onClick={closeModal}
+            style={{
+              position: 'absolute',
+              top: 4,
+              right: 4,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 4,
+              zIndex: 2,
+              color: 'var(--text-primary, #fff)'
+            }}
+            aria-label="Cerrar galería"
+          >
+            <X size={28} />
+          </button>
+          {/* Imagen principal */}
+          <div style={{
+            width: 'min(70vw, 600px)',
+            height: 'min(60vh, 400px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            marginBottom: '18px',
+            background: 'var(--modal-image-bg, #232336)',
+            borderRadius: '12px',
+          }}>
+            {/* Flecha izquierda */}
+            {modalImages.length > 1 && (
+              <button
+                onClick={prevImage}
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(255,255,255,0.7)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 38,
+                  height: 38,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 2
+                }}
+                aria-label="Anterior"
+              >
+                <ArrowLeft size={22} />
+              </button>
+            )}
+            {/* Imagen */}
+            <img
+              src={modalImages[modalIndex]}
+              alt={modalProject.title}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                borderRadius: '12px',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
+                background: 'var(--modal-image-bg, #232336)'
+              }}
+            />
+            {/* Flecha derecha */}
+            {modalImages.length > 1 && (
+              <button
+                onClick={nextImage}
+                style={{
+                  position: 'absolute',
+                  right: 0,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(255,255,255,0.7)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: 38,
+                  height: 38,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  zIndex: 2
+                }}
+                aria-label="Siguiente"
+              >
+                <ArrowRight size={22} />
+              </button>
+            )}
+          </div>
+          {/* Título y descripción */}
+          <h3 style={{ fontSize: 22, fontWeight: 600, marginBottom: 8, color: 'var(--text-primary, #fff)' }}>{modalProject.title}</h3>
+          <div style={{ color: 'var(--accent, #af52de)', fontSize: 15, marginBottom: 12 }}>{(modalProject.technologies_list || modalProject.technologies || []).join(', ')}</div>
+          <div style={{ color: 'var(--text-secondary, #ccc)', fontSize: 16, marginBottom: 12 }}>{modalProject.description}</div>
+          {/* GitHub link */}
+          {modalProject.github_url && (
+            <a
+              href={modalProject.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                color: 'var(--text-primary, #fff)',
+                fontWeight: 500,
+                fontSize: '15px',
+                marginBottom: '8px',
+                textDecoration: 'none'
+              }}
+            >
+              <Github size={18} /> Código fuente
+            </a>
+          )}
+          {/* Paginación */}
+          {modalImages.length > 1 && (
+            <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
+              {modalImages.map((img, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: i === modalIndex ? '#1d6ff2' : '#e0e0e0',
+                    border: '1px solid #bdbdbd',
+                    cursor: 'pointer',
+                  }}
+                  onClick={() => setModalIndex(i)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </section>
   )
 }
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 
+
 class Project(models.Model):
     """
     Modelo para proyectos del portafolio
@@ -10,7 +11,7 @@ class Project(models.Model):
         (2, 'Media'),
         (3, 'Alta'),
     ]
-    
+
     STATUS_CHOICES = [
         ('draft', 'Borrador'),
         ('published', 'Publicado'),
@@ -21,7 +22,7 @@ class Project(models.Model):
     slug = models.SlugField(unique=True, verbose_name='Slug')
     description = models.TextField(verbose_name='Descripción')
     short_description = models.CharField(max_length=300, verbose_name='Descripción corta')
-    image = models.ImageField(upload_to='projects/', blank=True, null=True, verbose_name='Imagen')
+    # El campo image se elimina, ahora se usará ProjectImage
     github_url = models.URLField(blank=True, verbose_name='URL de GitHub')
     live_url = models.URLField(blank=True, verbose_name='URL del sitio en vivo')
     technologies = models.CharField(max_length=500, help_text='Separar con comas', verbose_name='Tecnologías')
@@ -44,3 +45,17 @@ class Project(models.Model):
 
     def get_technologies_list(self):
         return [tech.strip() for tech in self.technologies.split(',') if tech.strip()]
+
+# Nuevo modelo para imágenes múltiples por proyecto
+class ProjectImage(models.Model):
+    project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='project_images/')
+    order = models.PositiveIntegerField(default=0, help_text='Orden de la imagen en la galería')
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = 'Imagen de proyecto'
+        verbose_name_plural = 'Imágenes de proyecto'
+
+    def __str__(self):
+        return f"Imagen de {self.project.title} (orden {self.order})"
