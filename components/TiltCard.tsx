@@ -56,35 +56,48 @@ const TiltCard = ({ children, className = '', style = {}, onClick }: TiltCardPro
   }
 
   return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-      style={{
-        transformStyle: "preserve-3d",
-        transform,
-        ...style
-      }}
-      className={`relative rounded-xl ${className}`}
-      whileHover={{ y: -8 }}
-    >
-      <div
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onClick={onClick}
         style={{
-          transform: "translateZ(75px)",
           transformStyle: "preserve-3d",
-          background: 'var(--card-bg)',
-          border: '1px solid var(--border-color)',
-          boxShadow: '0 4px 20px var(--shadow)',
-          borderRadius: '18px',
-          cursor: 'pointer',
-          overflow: 'hidden',
+          transform,
+          ...style
         }}
-        className="relative w-full h-full"
+        className={`relative rounded-xl ${className}`}
+        whileHover={{
+          scale: 1.06,
+          rotateZ: 4,
+          y: -12,
+          transition: { type: 'spring', stiffness: 320, damping: 18 }
+        }}
+        whileTap={{ scale: 0.98, rotateZ: 0 }}
       >
-        {children}
-      </div>
-    </motion.div>
+        <motion.div
+          style={{
+            transform: "translateZ(75px)",
+            transformStyle: "preserve-3d",
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            boxShadow: '0 6px 26px rgba(18,24,40,0.08)',
+            borderRadius: '18px',
+            cursor: 'pointer',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'stretch',
+            boxSizing: 'border-box',
+            willChange: 'transform, box-shadow, filter'
+          }}
+          className="relative w-full h-full"
+          whileHover={{ boxShadow: '0 28px 48px rgba(10,20,50,0.16)', filter: 'brightness(1.03)' }}
+          transition={{ type: 'tween', duration: 0.18 }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
   )
 }
 

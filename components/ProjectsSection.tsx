@@ -207,11 +207,12 @@ const ProjectsSection = () => {
         </button>
 
         {/* Projects Scroll Container */}
-        <div 
+    <div 
           ref={scrollRef}
           onScroll={checkScrollButtons}
           style={{
             display: 'flex',
+            alignItems: 'flex-end',
             gap: '20px',
             overflowX: 'auto',
             scrollbarWidth: 'none',
@@ -262,10 +263,10 @@ const ProjectsSection = () => {
             <TiltCard
               key={index}
               style={{
-                width: '300px',
+                width: '380px',
                 height: '480px',
-                minWidth: '300px',
-                maxWidth: '300px',
+                minWidth: '380px',
+                maxWidth: '380px',
                 animationDelay: `${index * 0.1}s`,
                 flexShrink: 0
               }}
@@ -273,12 +274,16 @@ const ProjectsSection = () => {
             >
               <div style={{
                 padding: '24px',
+                paddingBottom: '244px',
                 position: 'relative',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
+                justifyContent: 'space-between',
                 cursor: 'pointer'
               }}>
+                {/* Contenedor de contenido superior (fija altura mínima) */}
+                <div style={{ minHeight: '212px' }}>
                 {/* Tag */}
                 <div style={{
                   background: '#1d6ff2',
@@ -359,14 +364,18 @@ const ProjectsSection = () => {
                 }}>
                   {project.description}
                 </div>
+                </div>
 
-                {/* Imagen principal */}
+                {/* Imagen principal (alineada al fondo de la card) */}
                 <div style={{
+                  position: 'absolute',
+                  left: '24px',
+                  right: '24px',
+                  bottom: '24px',
                   height: '220px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginTop: 'auto',
                   overflow: 'hidden',
                   borderRadius: '12px',
                   boxShadow: '0 2px 12px rgba(0,0,0,0.08)'

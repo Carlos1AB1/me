@@ -1,17 +1,18 @@
 'use client'
 
-
+import { useState } from 'react'
+import { MessageCircle, FileText } from 'lucide-react'
 
 const Header = () => {
+  const [showMoreInfo, setShowMoreInfo] = useState(false)
   const navItems = [
     { name: 'Inicio', href: '/', type: 'link' },
-    { name: 'Github', href: 'https://github.com/Carlos1AB1', type: 'external' },
+    { name: 'Github', href: 'https://githu              Ir al Formulario.com/Carlos1AB1', type: 'external' },
     { name: 'Linkedin', href: 'https://www.linkedin.com/in/carlos-arturo-baron-estrada-58b90a359/', type: 'external' },
-  // ...eliminado: Habilidades...
     { name: 'Servicios', href: '/#servicios', type: 'scroll' },
     { name: 'Blog', href: '/blog', type: 'link' },
     { name: 'Contacto', href: '/#contacto', type: 'scroll' }
-  ];
+  ]
   
 
   return (
@@ -133,14 +134,163 @@ const Header = () => {
           lineHeight: 'clamp(1.1, 1.5, 1.4)'
         }}>
         Contrata servicios de desarrollo web profesional y obtén consultoría gratuita.{' '}
-        <a href="#" style={{ 
-          color: 'var(--link-color)', 
-          textDecoration: 'none',
-          transition: 'color 0.3s ease'
-        }}>
-          Saber más ⊕
-        </a>
+        <button 
+          onClick={() => setShowMoreInfo(!showMoreInfo)}
+          style={{ 
+            color: 'var(--link-color)', 
+            textDecoration: 'none',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            transition: 'color 0.3s ease',
+            fontSize: 'inherit',
+            fontFamily: 'inherit',
+            padding: 0
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--link-color)'}
+        >
+          Saber más {showMoreInfo ? '⊖' : '⊕'}
+        </button>
       </div>
+
+      {/* Información adicional desplegable */}
+      {showMoreInfo && (
+        <div 
+          className="more-info-panel"
+          style={{
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '8px',
+            padding: '16px',
+            margin: '8px clamp(6px, 4vw, 22px)',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            animation: 'slideDown 0.3s ease-out',
+            position: 'relative'
+          }}
+        >
+          <div style={{
+            position: 'absolute',
+            top: '-6px',
+            left: '50%',
+            width: '12px',
+            height: '12px',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--border-color)',
+            borderBottom: 'none',
+            borderRight: 'none',
+            transform: 'translateX(-50%) rotate(45deg)',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+          }}></div>
+
+          <h4 style={{
+            fontSize: '16px',
+            fontWeight: '600',
+            color: 'var(--text-primary)',
+            marginBottom: '12px',
+            textAlign: 'center'
+          }}>
+            💬 ¡Hablemos de lo que necesitas!
+          </h4>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            fontSize: '14px',
+            color: 'var(--text-secondary)',
+            lineHeight: '1.6'
+          }}>
+            <div style={{ textAlign: 'center', maxWidth: '300px' }}>
+              <div style={{
+                fontSize: '32px',
+                marginBottom: '8px',
+                color: '#25D366'
+              }}>
+                <MessageCircle size={32} />
+              </div>
+              <h5 style={{ 
+                fontWeight: '600', 
+                color: 'var(--text-primary)',
+                marginBottom: '8px',
+                fontSize: '15px'
+              }}>
+                WhatsApp
+              </h5>
+              <p style={{ margin: '0 0 8px 0' }}>
+                Respuesta inmediata
+              </p>
+              <a 
+                href="https://wa.me/573183487086?text=Hola,%20me%20gustaría%20hablar%20sobre%20un%20proyecto%20de%20desarrollo%20web"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  background: '#25D366',
+                  color: 'white',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  textDecoration: 'none',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  display: 'inline-block',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.background = '#128C7E'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#25D366'}
+              >
+                💬 Escribir
+              </a>
+            </div>
+          </div>
+
+          <div style={{
+            textAlign: 'center',
+            marginTop: '16px',
+            paddingTop: '16px',
+            borderTop: '1px solid var(--border-color)'
+          }}>
+            <p style={{
+              fontSize: '13px',
+              color: 'var(--text-secondary)',
+              marginBottom: '8px',
+              textAlign: 'center'
+            }}>
+              💡 También puedes contactarme desde la{' '}
+              <a 
+                href="/#contacto"
+                style={{
+                  color: 'var(--accent)',
+                  textDecoration: 'underline',
+                  fontWeight: '500',
+                  transition: 'color 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#1557c7'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--accent)'}
+              >
+                sección de contacto
+              </a>
+            </p>
+          
+          </div>
+        </div>
+      )}
+
+      {/* CSS para animación */}
+      <style>{`
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .more-info-panel {
+          animation: slideDown 0.3s ease-out;
+        }
+      `}</style>
     </header>
   )
 }

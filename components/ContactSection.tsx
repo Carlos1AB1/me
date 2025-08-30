@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
+import apiClient from '@/lib/api'
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -10,13 +11,31 @@ const ContactSection = () => {
     subject: '',
     message: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [success, setSuccess] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí puedes agregar la lógica para enviar el formulario
-    console.log('Form submitted:', formData)
-    alert('¡Mensaje enviado! Te contactaré pronto.')
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    setIsLoading(true)
+    setError(null)
+    setSuccess(false)
+
+    try {
+      await apiClient.sendContactMessage(formData)
+      setSuccess(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      
+      // Ocultar el mensaje de éxito después de 5 segundos
+      setTimeout(() => {
+        setSuccess(false)
+      }, 5000)
+    } catch (err) {
+      console.error('Error sending message:', err)
+      setError('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -375,15 +394,16 @@ const ContactSection = () => {
 
               <button
                 type="submit"
+                disabled={isLoading}
                 style={{
-                  background: '#1d6ff2',
+                  background: isLoading ? '#666' : '#1d6ff2',
                   color: 'white',
                   border: 'none',
                   padding: '16px 24px',
                   borderRadius: '12px',
                   fontSize: '16px',
                   fontWeight: '600',
-                  cursor: 'pointer',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
                   display: 'flex',
                   alignItems: 'center',
@@ -392,17 +412,50 @@ const ContactSection = () => {
                   marginTop: '8px'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = '#1557c7'
-                  e.currentTarget.style.transform = 'translateY(-2px)'
+                  if (!isLoading) {
+                    e.currentTarget.style.background = '#1557c7'
+                    e.currentTarget.style.transform = 'translateY(-2px)'
+                  }
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = '#1d6ff2'
-                  e.currentTarget.style.transform = 'translateY(0)'
+                  if (!isLoading) {
+                    e.currentTarget.style.background = '#1d6ff2'
+                    e.currentTarget.style.transform = 'translateY(0)'
+                  }
                 }}
               >
                 <Send size={18} />
-                Enviar mensaje
+                {isLoading ? 'Enviando...' : 'Enviar mensaje'}
               </button>
+
+              {/* Mensajes de estado */}
+              {error && (
+                <div style={{
+                  padding: '12px 16px',
+                  background: '#fee2e2',
+                  border: '1px solid #fecaca',
+                  borderRadius: '8px',
+                  color: '#dc2626',
+                  fontSize: '14px',
+                  marginTop: '16px'
+                }}>
+                  {error}
+                </div>
+              )}
+
+              {success && (
+                <div style={{
+                  padding: '12px 16px',
+                  background: '#d1fae5',
+                  border: '1px solid #a7f3d0',
+                  borderRadius: '8px',
+                  color: '#059669',
+                  fontSize: '14px',
+                  marginTop: '16px'
+                }}>
+                  ¡Mensaje enviado exitosamente! Te contactaré pronto.
+                </div>
+              )}
             </form>
           </div>
         </div>
