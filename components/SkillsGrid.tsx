@@ -7,15 +7,15 @@ import SkillsModal from './SkillsModal'
 const SkillsGrid = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const technologies = [
-    { name: 'React', icon: '⚛️', gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)' },
-    { name: 'Next.js', icon: '🚀', gradient: 'linear-gradient(135deg, #636e72 0%, #2d3436 100%)' },
-    { name: 'TypeScript', icon: '📘', gradient: 'linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%)' },
-    { name: 'Node.js', icon: '🟢', gradient: 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' },
-    { name: 'Python', icon: '🐍', gradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' },
-    { name: 'AWS', icon: '☁️', gradient: 'linear-gradient(135deg, #fd79a8 0%, #e84393 100%)' },
-    { name: 'Docker', icon: '🐳', gradient: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)' },
-    { name: 'MongoDB', icon: '🍃', gradient: 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' },
-    { name: 'Git', icon: '📋', gradient: 'linear-gradient(135deg, #636e72 0%, #2d3436 100%)' },
+    { name: 'React', icon: '⚛️', color: '#61dafb', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)' },
+    { name: 'Next.js', icon: '🚀', color: '#000000', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #636e72 0%, #2d3436 100%)' },
+    { name: 'TypeScript', icon: '📘', color: '#3178c6', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%)' },
+    { name: 'Node.js', icon: '🟢', color: '#339933', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' },
+    { name: 'Python', icon: '🐍', color: '#3776ab', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)' },
+    { name: 'AWS', icon: '☁️', color: '#ff9900', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #fd79a8 0%, #e84393 100%)' },
+    { name: 'Docker', icon: '🐳', color: '#2496ed', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #74b9ff 0%, #0984e3 100%)' },
+    { name: 'MongoDB', icon: '🍃', color: '#47a248', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #00b894 0%, #00a085 100%)' },
+    { name: 'Git', icon: '📋', color: '#f05032', gradient_type: 'linear', gradient_css: 'linear-gradient(135deg, #636e72 0%, #2d3436 100%)' },
   ]
 
   return (

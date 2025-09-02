@@ -28,7 +28,7 @@ const Header = () => {
           color: 'var(--text-secondary)',
           transition: 'all 0.3s ease'
         }}>
-        Building the future, one line at a time.
+        Desarrollando el futuro, línea por línea.
       </div>
 
       {/* Main Header */}
@@ -206,7 +206,8 @@ const Header = () => {
                 marginBottom: '8px',
                 color: '#25D366'
               }}>
-                <MessageCircle size={32} />
+                {/* Imagen en /public/icon/logoWA.png — se sirve desde /icon/logoWA.png */}
+                <img src="/icon/logoWA.png" alt="WhatsApp" style={{ width: 100, height: 100, borderRadius: 6, objectFit: 'cover' }} />
               </div>
               <h5 style={{ 
                 fontWeight: '600', 
@@ -258,13 +259,13 @@ const Header = () => {
               <a 
                 href="/#contacto"
                 style={{
-                  color: 'var(--accent)',
+                  color: '#1557c7',
                   textDecoration: 'underline',
                   fontWeight: '500',
                   transition: 'color 0.3s ease'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.color = '#1557c7'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--accent)'}
+                onMouseEnter={(e) => e.currentTarget.style.color = '#0f4fb3'}
+                onMouseLeave={(e) => e.currentTarget.style.color = '#1557c7'}
               >
                 sección de contacto
               </a>

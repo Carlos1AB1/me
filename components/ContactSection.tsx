@@ -109,9 +109,9 @@ const ContactSection = () => {
               marginBottom: '40px'
             }}>
               {[
-                { icon: Mail, label: 'Email', value: 'tu@email.com', href: 'mailto:tu@email.com' },
-                { icon: Phone, label: 'Teléfono', value: '+XX (XXX) XXX-XXXX', href: 'tel:+XXXXXXXXXX' },
-                { icon: MapPin, label: 'Ubicación', value: 'Tu Ciudad, Tu País', href: null }
+                { icon: Mail, label: 'Email', value: 'cabaron_23@cue.edu.co', href: 'mailto:cabaron_23@cue.edu.co' },
+                { icon: Phone, label: 'Teléfono', value: '+57 (318) 348-7086', href: 'tel:+573183487086' },
+                { icon: MapPin, label: 'Ubicación', value: 'Armenia, Quindío', href: null }
               ].map((contact, index) => (
                 <div key={index} style={{
                   display: 'flex',

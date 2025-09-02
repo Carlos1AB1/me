@@ -67,16 +67,16 @@ const Habilidades = () => {
   ]
 
   const allSkills = [
-    { name: 'React ⚛️', icon: '⚛️' },
-    { name: 'Next.js 🚀', icon: '🚀' },
-    { name: 'TypeScript 📘', icon: '📘' },
-    { name: 'Node.js 🟢', icon: '🟢' },
-    { name: 'Python 🐍', icon: '🐍' },
-    { name: 'AWS ☁️', icon: '☁️' },
-    { name: 'Docker 🐳', icon: '🐳' },
-    { name: 'MongoDB 🍃', icon: '🍃' },
-    { name: 'Git 📋', icon: '📋' },
-    { name: 'Vue.js 💚', icon: '💚' }
+    { name: 'React ⚛️', icon: '⚛️', color: '#61dafb', gradient_type: 'linear' },
+    { name: 'Next.js 🚀', icon: '🚀', color: '#000000', gradient_type: 'linear' },
+    { name: 'TypeScript 📘', icon: '📘', color: '#3178c6', gradient_type: 'linear' },
+    { name: 'Node.js 🟢', icon: '🟢', color: '#339933', gradient_type: 'linear' },
+    { name: 'Python 🐍', icon: '🐍', color: '#3776ab', gradient_type: 'linear' },
+    { name: 'AWS ☁️', icon: '☁️', color: '#ff9900', gradient_type: 'linear' },
+    { name: 'Docker 🐳', icon: '🐳', color: '#2496ed', gradient_type: 'linear' },
+    { name: 'MongoDB 🍃', icon: '🍃', color: '#47a248', gradient_type: 'linear' },
+    { name: 'Git 📋', icon: '📋', color: '#f05032', gradient_type: 'linear' },
+    { name: 'Vue.js 💚', icon: '💚', color: '#4fc08d', gradient_type: 'linear' }
   ]
 
   const getSkillColor = (level: number) => {
@@ -137,15 +137,7 @@ const Habilidades = () => {
           Stack Tecnológico Principal
         </h2>
         
-        <MacDock>
-          {allSkills.map((skill, index) => (
-            <DockIcon
-              key={index}
-              icon={skill.icon}
-              text={skill.name.split(' ')[0]}
-            />
-          ))}
-        </MacDock>
+        <MacDock technologies={allSkills} />
       </section>
 
       {/* Detailed Skills */}

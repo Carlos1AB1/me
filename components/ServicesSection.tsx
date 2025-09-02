@@ -16,6 +16,8 @@ interface Service {
   image: string | null;
   price_type: string;
   price_display: string;
+  price_offer_display?: string | null;
+  price_offer?: number | null;
   duration: string;
   duration_display: string;
   is_featured: boolean;
@@ -189,20 +191,50 @@ const ServicesSection = () => {
                     alignItems: 'center'
                   }}>
                     <div>
-                      <div style={{
-                        fontSize: '18px',
-                        fontWeight: '600',
-                        color: '#1d6ff2',
-                        marginBottom: '2px'
-                      }}>
-                        {service.price_display}
-                      </div>
-                      <div style={{
-                        fontSize: '12px',
-                        color: 'var(--text-secondary)'
-                      }}>
-                        {service.duration_display}
-                      </div>
+                          <div>
+                            {service.price_offer_display ? (
+                              <>
+                                <div style={{
+                                  fontSize: '14px',
+                                  color: 'var(--text-secondary)',
+                                  marginBottom: '6px',
+                                  display: 'flex',
+                                  alignItems: 'baseline',
+                                  gap: '8px'
+                                }}>
+                                  <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 600 }}>Antes:</span>
+                                  <span style={{ textDecoration: 'line-through', color: 'var(--text-secondary)' }}>{service.price_display}</span>
+                                </div>
+                                <div style={{
+                                  fontSize: '18px',
+                                  fontWeight: 700,
+                                  color: '#1d6ff2',
+                                  display: 'flex',
+                                  alignItems: 'baseline',
+                                  gap: '8px'
+                                }}>
+                                  <span style={{ fontSize: '12px', color: '#1d6ff2', fontWeight: 700 }}>Ahora:</span>
+                                  <span style={{ fontWeight: 700 }}>{service.price_offer_display}</span>
+                                </div>
+                              </>
+                            ) : (
+                              <div style={{
+                                fontSize: '18px',
+                                fontWeight: '600',
+                                color: '#1d6ff2',
+                                marginBottom: '2px'
+                              }}>
+                                {service.price_display}
+                              </div>
+                            )}
+
+                            <div style={{
+                              fontSize: '12px',
+                              color: 'var(--text-secondary)'
+                            }}>
+                              {service.duration_display}
+                            </div>
+                          </div>
                     </div>
                     <button style={{
                       background: '#1d6ff2',

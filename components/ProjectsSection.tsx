@@ -121,6 +121,25 @@ const ProjectsSection = () => {
         padding: '0 80px', // Espacio para las flechas
         marginBottom: '40px'
       }}>
+      <style>{`
+        .project-card .project-image-container { position: relative; }
+        .project-card .image-overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 700;
+          font-size: 15px;
+          background: rgba(0,0,0,0.45);
+          opacity: 0;
+          transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+          border-radius: 12px;
+          pointer-events: none;
+        }
+        .project-card:hover .image-overlay { opacity: 1; }
+      `}</style>
       {/* Section Title */}
       <div style={{
         maxWidth: '1200px',
@@ -367,7 +386,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Imagen principal (alineada al fondo de la card) */}
-                <div style={{
+                <div className="project-card" style={{
                   position: 'absolute',
                   left: '24px',
                   right: '24px',
@@ -381,17 +400,20 @@ const ProjectsSection = () => {
                   boxShadow: '0 2px 12px rgba(0,0,0,0.08)'
                 }}>
                   {project.images && project.images.length > 0 ? (
-                    <img
-                      src={project.images[0].image}
-                      alt={project.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '12px',
-                        transition: 'transform 0.2s',
-                      }}
-                    />
+                    <div className="project-image-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                      <img
+                        src={project.images[0].image}
+                        alt={project.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          borderRadius: '12px',
+                          transition: 'transform 0.2s',
+                        }}
+                      />
+                      <div className="image-overlay">Clic para ver</div>
+                    </div>
                   ) : (
                     <div style={{
                       width: '100%',

@@ -21,7 +21,7 @@ const HelpWidget = () => {
           boxShadow: '0 4px 20px var(--shadow)',
           width: '44px',
           height: '44px',
-          zIndex: 1001,
+          zIndex: 900,
           border: '1px solid var(--border-color)',
           transition: 'all 0.3s ease',
           cursor: 'pointer',
@@ -41,7 +41,7 @@ const HelpWidget = () => {
     )
   }
 
-  return (
+    return (
     <div 
       className="help-widget"
       style={{
@@ -53,7 +53,7 @@ const HelpWidget = () => {
         padding: '16px',
         boxShadow: '0 4px 20px var(--shadow)',
         width: '280px',
-        zIndex: 1001,
+        zIndex: 900,
         border: '1px solid var(--border-color)',
         transition: 'all 0.3s ease'
       }}
@@ -62,9 +62,9 @@ const HelpWidget = () => {
       <button
         onClick={() => setIsOpen(false)}
         style={{
-          position: 'fixed',
-          top: '108px',
-          right: '28px',
+          position: 'absolute',
+          top: '8px',
+          right: '8px',
           background: 'none',
           border: 'none',
           cursor: 'pointer',
@@ -74,9 +74,9 @@ const HelpWidget = () => {
           alignItems: 'center',
           justifyContent: 'center',
           transition: 'background 0.2s ease',
-          width: '24px',
-          height: '24px',
-          zIndex: 1002
+          width: '28px',
+          height: '28px',
+          zIndex: 901
         }}
         onMouseOver={(e) => {
           e.currentTarget.style.background = 'var(--border-color)'
@@ -84,6 +84,7 @@ const HelpWidget = () => {
         onMouseOut={(e) => {
           e.currentTarget.style.background = 'transparent'
         }}
+        aria-label="Cerrar ayuda"
       >
         <X size={14} color="var(--text-secondary)" />
       </button>
