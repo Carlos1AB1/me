@@ -328,7 +328,7 @@ const ProjectsSection = () => {
                   fontSize: '20px',
                   color: 'var(--text-secondary)'
                 }}>
-                  👨‍💻
+                  👨🏻‍💻
                 </div>
 
                 {/* Title */}

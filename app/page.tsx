@@ -8,7 +8,6 @@ import SkillsModal from '@/components/SkillsModal'
 import ProjectsSection from '@/components/ProjectsSection'
 import ServicesSection from '@/components/ServicesSection'
 import ContactSection from '@/components/ContactSection'
-import HelpWidget from '@/components/HelpWidget'
 import DarkModeToggle from '@/components/DarkModeToggle'
 import apiClient from '@/lib/api'
 
@@ -120,7 +119,6 @@ export default function Home() {
       <ProjectsSection />
       <ServicesSection />
       <ContactSection />
-      <HelpWidget />
       <DarkModeToggle />
     </div>
     

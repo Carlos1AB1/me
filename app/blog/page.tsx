@@ -2,7 +2,6 @@
 
 import Header from '../../components/Header'
 import DarkModeToggle from '../../components/DarkModeToggle'
-import HelpWidget from '../../components/HelpWidget'
 import TiltCard from '../../components/TiltCard'
 import { useState, useEffect } from 'react'
 import { Calendar, Clock, User, Tag, ArrowRight } from 'lucide-react'
@@ -149,7 +148,6 @@ const Blog = () => {
           </div>
         </section>
         <DarkModeToggle />
-        <HelpWidget />
       </div>
     )
   }
@@ -183,7 +181,6 @@ const Blog = () => {
           </div>
         </section>
         <DarkModeToggle />
-        <HelpWidget />
       </div>
     )
   }
@@ -208,7 +205,6 @@ const Blog = () => {
     }}>
       <Header />
       <DarkModeToggle />
-      <HelpWidget />
       
       {/* Hero Section */}
       <section style={{

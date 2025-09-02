@@ -2,7 +2,6 @@
 
 import Header from '../../components/Header'
 import DarkModeToggle from '../../components/DarkModeToggle'
-import HelpWidget from '../../components/HelpWidget'
 import MacDock from '../../components/MacDock'
 import DockIcon from '../../components/DockIcon'
 
@@ -95,7 +94,6 @@ const Habilidades = () => {
     }}>
       <Header />
       <DarkModeToggle />
-      <HelpWidget />
       
       {/* Hero Section */}
       <section style={{

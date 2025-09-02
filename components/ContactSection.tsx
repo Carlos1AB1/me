@@ -185,8 +185,8 @@ const ContactSection = () => {
                 gap: '12px'
               }}>
                 {[
-                  { icon: Github, href: 'https://github.com/tu-usuario', label: 'GitHub' },
-                  { icon: Linkedin, href: 'https://linkedin.com/in/tu-perfil', label: 'LinkedIn' }
+                  { icon: Github, href: 'https://github.com/Carlos1AB1', label: 'GitHub' },
+                  { icon: Linkedin, href: 'https://www.linkedin.com/in/carlos-arturo-baron-estrada-58b90a359/', label: 'LinkedIn' }
                 ].map((social, index) => (
                   <a
                     key={index}
