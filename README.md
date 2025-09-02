@@ -6,4 +6,7 @@ Portafolio personal desarrollado con Next.js y desplegado en Vercel.
 - **Producción:** https://arturo.engineer
 - **Backend:** https://me-backend-vguc.onrender.com
 
+## Auto-Deploy
+✅ Auto-deploy activado desde GitHub
+
 <!-- Auto-deploy test -->
