@@ -25,6 +25,7 @@ const ProjectsSection = () => {
         
         // Convertir datos del backend al formato esperado
   // El backend ya devuelve project.images (array de objetos con image y order)
+  console.log('Projects data from Django:', projectsData)
   setProjects(projectsData)
       } catch (error) {
         console.error('Error loading projects:', error)
@@ -355,7 +356,7 @@ const ProjectsSection = () => {
                     WebkitBoxOrient: 'vertical',
                     marginBottom: '20px'
                   }}>
-                    {project.description && project.description.length > 0
+                    {project.description && project.description.trim() !== ''
                       ? (project.description.length > 120 
                           ? project.description.substring(0, 120) + '...'
                           : project.description)
@@ -699,7 +700,9 @@ const ProjectsSection = () => {
                 lineHeight: '1.6',
                 marginBottom: '24px'
               }}>
-                {modalProject.description}
+                {modalProject.description && modalProject.description.trim() !== '' 
+                  ? modalProject.description 
+                  : 'No hay descripción disponible para este proyecto.'}
               </div>
 
               {/* Detalles técnicos */}
