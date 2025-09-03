@@ -139,6 +139,16 @@ const ProjectsSection = () => {
           pointer-events: none;
         }
         .project-card:hover .image-overlay { opacity: 1; }
+        
+        @media (max-width: 768px) {
+          .projects-nav-button {
+            display: none !important;
+          }
+          
+          .projects-section {
+            padding: 0 20px !important;
+          }
+        }
       `}</style>
       {/* Section Title */}
       <div style={{
@@ -429,24 +439,107 @@ const ProjectsSection = () => {
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         transition: 'background 0.2s',
+        padding: '20px'
       }}
         onClick={closeModal}
       >
+        <style jsx>{`
+          .modal-container {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 90vw;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .modal-image-section {
+            flex: 1 1 60%;
+            position: relative;
+            overflow: hidden;
+          }
+
+          .modal-image-container {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+          }
+
+          .modal-content-section {
+            flex: 1 1 40%;
+            padding: 24px;
+            border-left: 1px solid var(--border-color);
+            overflow-y: auto;
+            overflow-x: hidden;
+          }
+
+          @media (max-width: 768px) {
+            .modal-container {
+              width: 95vw !important;
+              max-width: 95vw !important;
+              height: 90vh !important;
+              max-height: 90vh !important;
+              flex-direction: column !important;
+              border-radius: 16px !important;
+            }
+            
+            .modal-image-section {
+              flex: 1 1 45% !important;
+              width: 100% !important;
+              height: 45% !important;
+              border-left: none !important;
+              border-bottom: 1px solid var(--border-color) !important;
+            }
+            
+            .modal-content-section {
+              flex: 1 1 55% !important;
+              width: 100% !important;
+              height: 55% !important;
+              padding: 16px !important;
+              border-left: none !important;
+              border-top: 1px solid var(--border-color) !important;
+              overflow-y: auto !important;
+              overflow-x: hidden !important;
+            }
+
+            .modal-image-container {
+              height: 280px !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .modal-container {
+              width: 98vw !important;
+              max-width: 98vw !important;
+              height: 95vh !important;
+              max-height: 95vh !important;
+              border-radius: 12px !important;
+            }
+            
+            .modal-content-section {
+              padding: 12px !important;
+            }
+
+            .modal-image-container {
+              height: 250px !important;
+            }
+          }
+        `}</style>
         <div
-          style={{
-            background: 'var(--card-bg)',
-            color: 'var(--text-primary)',
-            borderRadius: '20px',
-            border: '1px solid var(--border-color)',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-            width: '90vw',
-            maxWidth: '900px',
-            maxHeight: '90vh',
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            overflow: 'hidden'
-          }}
+          className="modal-container"
           onClick={e => e.stopPropagation()}
         >
           {/* Header del Modal */}
@@ -568,14 +661,14 @@ const ProjectsSection = () => {
             overflow: 'hidden'
           }}>
             {/* Galería de imágenes */}
-            <div style={{
+            <div className="modal-image-section" style={{
               flex: '1 1 60%',
               padding: '24px',
               display: 'flex',
               flexDirection: 'column'
             }}>
               {/* Imagen principal */}
-              <div style={{
+              <div className="modal-image-container" style={{
                 width: '100%',
                 height: '400px',
                 display: 'flex',
@@ -678,7 +771,7 @@ const ProjectsSection = () => {
             </div>
 
             {/* Información del proyecto */}
-            <div style={{
+            <div className="modal-content-section" style={{
               flex: '1 1 40%',
               padding: '24px',
               borderLeft: '1px solid var(--border-color)',

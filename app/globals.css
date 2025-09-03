@@ -70,6 +70,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 /* Configuración base del body con la pila de fuentes oficial de Apple */
 body {
   font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -79,6 +83,7 @@ body {
   font-weight: 400;
   letter-spacing: -0.022em;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
   
   /* Optimizaciones de renderizado de Apple */
   text-rendering: optimizeLegibility;
