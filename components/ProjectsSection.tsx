@@ -430,123 +430,41 @@ const ProjectsSection = () => {
         left: 0,
         width: '100vw',
         height: '100vh',
-        background: 'rgba(20,20,30,0.35)',
+        background: 'rgba(0,0,0,0.8)',
         zIndex: 1000,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        animation: 'fadeIn 0.2s',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        transition: 'background 0.2s',
+        animation: 'fadeIn 0.3s',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         padding: '20px'
       }}
         onClick={closeModal}
       >
-        <style jsx>{`
-          .modal-container {
-            background: var(--card-bg);
-            color: var(--text-primary);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            width: 90vw;
-            max-width: 900px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: row;
-            position: relative;
-            overflow: hidden;
-          }
-
-          .modal-image-section {
-            flex: 1 1 60%;
-            position: relative;
-            overflow: hidden;
-          }
-
-          .modal-image-container {
-            width: 100%;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-          }
-
-          .modal-content-section {
-            flex: 1 1 40%;
-            padding: 24px;
-            border-left: 1px solid var(--border-color);
-            overflow-y: auto;
-            overflow-x: hidden;
-          }
-
-          @media (max-width: 768px) {
-            .modal-container {
-              width: 95vw !important;
-              max-width: 95vw !important;
-              height: 90vh !important;
-              max-height: 90vh !important;
-              flex-direction: column !important;
-              border-radius: 16px !important;
-            }
-            
-            .modal-image-section {
-              flex: 1 1 45% !important;
-              width: 100% !important;
-              height: 45% !important;
-              border-left: none !important;
-              border-bottom: 1px solid var(--border-color) !important;
-            }
-            
-            .modal-content-section {
-              flex: 1 1 55% !important;
-              width: 100% !important;
-              height: 55% !important;
-              padding: 16px !important;
-              border-left: none !important;
-              border-top: 1px solid var(--border-color) !important;
-              overflow-y: auto !important;
-              overflow-x: hidden !important;
-            }
-
-            .modal-image-container {
-              height: 320px !important;
-            }
-          }
-
-          @media (max-width: 480px) {
-            .modal-container {
-              width: 98vw !important;
-              max-width: 98vw !important;
-              height: 95vh !important;
-              max-height: 95vh !important;
-              border-radius: 12px !important;
-            }
-            
-            .modal-content-section {
-              padding: 12px !important;
-            }
-
-            .modal-image-container {
-              height: 280px !important;
-            }
-          }
-        `}</style>
         <div
-          className="modal-container"
+          style={{
+            background: 'var(--card-bg)',
+            color: 'var(--text-primary)',
+            borderRadius: '20px',
+            border: '1px solid var(--border-color)',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
+            width: '95vw',
+            height: '90vh',
+            maxWidth: '1200px',
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            overflow: 'hidden'
+          }}
           onClick={e => e.stopPropagation()}
         >
           {/* Header del Modal */}
           <div style={{
-            padding: '24px 32px 20px',
+            padding: '20px 24px',
             borderBottom: '1px solid var(--border-color)',
-            position: 'relative'
+            position: 'relative',
+            flexShrink: 0
           }}>
             <button
               onClick={closeModal}
@@ -560,14 +478,14 @@ const ProjectsSection = () => {
                 cursor: 'pointer',
                 padding: '8px',
                 color: 'var(--text-primary)',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.2s ease',
+                zIndex: 10
               }}
               aria-label="Cerrar proyecto"
             >
               <X size={20} />
             </button>
 
-            {/* Título y badge */}
             <div style={{
               background: '#1d6ff2',
               color: 'white',
@@ -576,7 +494,7 @@ const ProjectsSection = () => {
               padding: '4px 10px',
               borderRadius: '6px',
               display: 'inline-block',
-              marginBottom: '12px',
+              marginBottom: '8px',
               textTransform: 'uppercase',
               letterSpacing: '0.5px'
             }}>
@@ -584,7 +502,7 @@ const ProjectsSection = () => {
             </div>
 
             <h2 style={{
-              fontSize: '28px',
+              fontSize: '24px',
               fontWeight: '700',
               margin: '0 0 8px 0',
               color: 'var(--text-primary)',
@@ -593,18 +511,16 @@ const ProjectsSection = () => {
               {modalProject.title}
             </h2>
 
-            {/* Tecnologías */}
             <div style={{
               color: '#af52de',
-              fontSize: '16px',
+              fontSize: '14px',
               fontWeight: '500',
               marginBottom: '12px'
             }}>
               {(modalProject.technologies_list || modalProject.technologies || []).join(', ')}
             </div>
 
-            {/* Enlaces */}
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {modalProject.github_url && (
                 <a
                   href={modalProject.github_url}
@@ -613,19 +529,19 @@ const ProjectsSection = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '6px',
+                    gap: '4px',
                     color: 'var(--text-primary)',
                     fontWeight: '500',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     textDecoration: 'none',
                     background: 'var(--bg-secondary)',
-                    padding: '6px 12px',
-                    borderRadius: '8px',
+                    padding: '4px 8px',
+                    borderRadius: '6px',
                     border: '1px solid var(--border-color)',
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  <Github size={16} /> Código fuente
+                  <Github size={14} /> Código
                 </a>
               )}
               {modalProject.live_url && (
@@ -636,132 +552,136 @@ const ProjectsSection = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '6px',
+                    gap: '4px',
                     color: 'white',
                     fontWeight: '500',
-                    fontSize: '14px',
+                    fontSize: '12px',
                     textDecoration: 'none',
                     background: '#1d6ff2',
-                    padding: '6px 12px',
-                    borderRadius: '8px',
+                    padding: '4px 8px',
+                    borderRadius: '6px',
                     transition: 'all 0.2s ease'
                   }}
                 >
-                  🚀 Ver demo
+                  🚀 Demo
                 </a>
               )}
             </div>
           </div>
 
-          {/* Contenido del Modal */}
+          {/* Contenido Principal: Imagen Grande */}
           <div style={{
+            flex: 1,
             display: 'flex',
             flexDirection: 'row',
-            flex: 1,
             overflow: 'hidden'
           }}>
-            {/* Galería de imágenes */}
-            <div className="modal-image-section" style={{
-              flex: '1 1 60%',
-              padding: '24px',
+            {/* Sección de Imagen - Ahora más grande */}
+            <div style={{
+              flex: '1 1 70%',
+              padding: '20px',
               display: 'flex',
-              flexDirection: 'column'
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              background: 'var(--bg-secondary)',
+              position: 'relative'
             }}>
-              {/* Imagen principal */}
-              <div className="modal-image-container" style={{
+              {/* Contenedor de imagen principal - MUY GRANDE */}
+              <div style={{
                 width: '100%',
-                height: '450px',
+                height: '100%',
+                maxHeight: '600px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
-                background: 'var(--bg-secondary)',
+                background: '#000',
                 borderRadius: '12px',
-                border: '1px solid var(--border-color)',
-                overflow: 'hidden'
+                overflow: 'hidden',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
               }}>
-                {/* Flecha izquierda */}
+                {/* Navegación de imágenes */}
                 {modalImages.length > 1 && (
-                  <button
-                    onClick={prevImage}
-                    style={{
-                      position: 'absolute',
-                      left: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(255,255,255,0.9)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '50%',
-                      width: '44px',
-                      height: '44px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      zIndex: 2,
-                      color: 'var(--text-primary)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                      transition: 'all 0.2s ease'
-                    }}
-                    aria-label="Imagen anterior"
-                  >
-                    <ArrowLeft size={20} />
-                  </button>
+                  <>
+                    <button
+                      onClick={prevImage}
+                      style={{
+                        position: 'absolute',
+                        left: '16px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.7)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '50px',
+                        height: '50px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        zIndex: 3,
+                        color: 'white',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                        transition: 'all 0.3s ease'
+                      }}
+                      aria-label="Imagen anterior"
+                    >
+                      <ArrowLeft size={24} />
+                    </button>
+                    
+                    <button
+                      onClick={nextImage}
+                      style={{
+                        position: 'absolute',
+                        right: '16px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.7)',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '50px',
+                        height: '50px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        zIndex: 3,
+                        color: 'white',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                        transition: 'all 0.3s ease'
+                      }}
+                      aria-label="Imagen siguiente"
+                    >
+                      <ArrowRight size={24} />
+                    </button>
+                  </>
                 )}
 
-                {/* Imagen */}
+                {/* Imagen GRANDE */}
                 <img
                   src={modalImages[modalIndex]}
                   alt={modalProject.title}
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                     borderRadius: '12px'
                   }}
                 />
 
-                {/* Flecha derecha */}
-                {modalImages.length > 1 && (
-                  <button
-                    onClick={nextImage}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(255,255,255,0.9)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '50%',
-                      width: '44px',
-                      height: '44px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      zIndex: 2,
-                      color: 'var(--text-primary)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                      transition: 'all 0.2s ease'
-                    }}
-                    aria-label="Imagen siguiente"
-                  >
-                    <ArrowRight size={20} />
-                  </button>
-                )}
-
-                {/* Indicador de imagen */}
+                {/* Indicador de posición */}
                 {modalImages.length > 1 && (
                   <div style={{
                     position: 'absolute',
-                    bottom: '12px',
+                    bottom: '16px',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    background: 'rgba(0,0,0,0.7)',
+                    background: 'rgba(0,0,0,0.8)',
                     color: 'white',
-                    padding: '4px 12px',
-                    borderRadius: '12px',
-                    fontSize: '12px',
+                    padding: '6px 16px',
+                    borderRadius: '20px',
+                    fontSize: '14px',
                     fontWeight: '500'
                   }}>
                     {modalIndex + 1} / {modalImages.length}
@@ -770,57 +690,58 @@ const ProjectsSection = () => {
               </div>
             </div>
 
-            {/* Información del proyecto */}
-            <div className="modal-content-section" style={{
-              flex: '1 1 40%',
-              padding: '24px',
+            {/* Panel de información - Más compacto */}
+            <div style={{
+              flex: '1 1 30%',
+              padding: '20px',
               borderLeft: '1px solid var(--border-color)',
-              overflow: 'auto'
+              overflow: 'auto',
+              background: 'var(--card-bg)'
             }}>
               <h3 style={{
-                fontSize: '18px',
+                fontSize: '16px',
                 fontWeight: '600',
-                marginBottom: '16px',
+                marginBottom: '12px',
                 color: 'var(--text-primary)'
               }}>
-                Descripción del proyecto
+                Descripción
               </h3>
 
               <div style={{
-                fontSize: '15px',
+                fontSize: '14px',
                 color: 'var(--text-secondary)',
-                lineHeight: '1.6',
-                marginBottom: '24px'
+                lineHeight: '1.5',
+                marginBottom: '20px'
               }}>
                 {modalProject.short_description && modalProject.short_description.trim() !== '' 
                   ? modalProject.short_description 
                   : 'No hay descripción disponible para este proyecto.'}
               </div>
 
-              {/* Detalles técnicos */}
+              {/* Tecnologías */}
               {modalProject.technologies_list && modalProject.technologies_list.length > 0 && (
-                <div style={{ marginBottom: '24px' }}>
+                <div style={{ marginBottom: '20px' }}>
                   <h4 style={{
-                    fontSize: '16px',
+                    fontSize: '14px',
                     fontWeight: '600',
-                    marginBottom: '12px',
+                    marginBottom: '8px',
                     color: 'var(--text-primary)'
                   }}>
-                    Tecnologías utilizadas
+                    Tecnologías
                   </h4>
                   <div style={{
                     display: 'flex',
                     flexWrap: 'wrap',
-                    gap: '8px'
+                    gap: '6px'
                   }}>
                     {modalProject.technologies_list.map((tech: string, index: number) => (
                       <span key={index} style={{
-                        fontSize: '12px',
+                        fontSize: '11px',
                         color: 'var(--text-primary)',
                         background: 'var(--bg-secondary)',
                         border: '1px solid var(--border-color)',
-                        padding: '4px 8px',
-                        borderRadius: '6px',
+                        padding: '3px 6px',
+                        borderRadius: '4px',
                         fontWeight: '500'
                       }}>
                         {tech}
@@ -830,35 +751,34 @@ const ProjectsSection = () => {
                 </div>
               )}
 
-              {/* Metadata adicional */}
+              {/* Info adicional */}
               <div style={{
                 background: 'var(--bg-secondary)',
                 border: '1px solid var(--border-color)',
-                borderRadius: '8px',
-                padding: '16px'
+                borderRadius: '6px',
+                padding: '12px'
               }}>
                 <h4 style={{
-                  fontSize: '14px',
+                  fontSize: '12px',
                   fontWeight: '600',
-                  marginBottom: '12px',
+                  marginBottom: '8px',
                   color: 'var(--text-primary)',
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px'
                 }}>
-                  Información del proyecto
+                  Info del proyecto
                 </h4>
                 <div style={{
-                  fontSize: '13px',
+                  fontSize: '11px',
                   color: 'var(--text-secondary)',
-                  marginBottom: '8px'
+                  marginBottom: '4px'
                 }}>
                   <strong>ID:</strong> {modalProject.id}
                 </div>
                 {modalProject.priority && (
                   <div style={{
-                    fontSize: '13px',
-                    color: 'var(--text-secondary)',
-                    marginBottom: '8px'
+                    fontSize: '11px',
+                    color: 'var(--text-secondary)'
                   }}>
                     <strong>Prioridad:</strong> {modalProject.priority}
                   </div>
@@ -866,6 +786,34 @@ const ProjectsSection = () => {
               </div>
             </div>
           </div>
+
+          {/* Versión móvil */}
+          <style jsx>{`
+            @media (max-width: 768px) {
+              div:nth-child(2) {
+                flex-direction: column !important;
+                height: 95vh !important;
+              }
+              
+              div:nth-child(2) > div:nth-child(2) > div:first-child {
+                flex: 1 1 60% !important;
+                padding: 16px !important;
+              }
+              
+              div:nth-child(2) > div:nth-child(2) > div:last-child {
+                flex: 1 1 40% !important;
+                padding: 16px !important;
+                border-left: none !important;
+                border-top: 1px solid var(--border-color) !important;
+              }
+            }
+            
+            @media (max-width: 480px) {
+              div:nth-child(2) > div:nth-child(2) > div:first-child > div {
+                max-height: 300px !important;
+              }
+            }
+          `}</style>
         </div>
       </div>
     )}
