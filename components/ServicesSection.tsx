@@ -161,13 +161,26 @@ const ServicesSection = () => {
         ) : (
           <div className="services-grid">
             {services.map((service, index) => (
-              <TiltCard
+              <div 
                 key={service.id}
-                className="service-card"
                 style={{
-                  animationDelay: `${index * 0.1}s`
+                  height: '520px',
+                  minHeight: '520px',
+                  maxHeight: '520px',
+                  width: '100%',
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
               >
+                <TiltCard
+                  className="service-card"
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    height: '100%',
+                    width: '100%',
+                    flex: 1
+                  }}
+                >
                 <div style={{
                   padding: 'clamp(20px, 4vw, 30px)',
                   height: '100%',
@@ -323,6 +336,7 @@ const ServicesSection = () => {
                   </div>
                 </div>
               </TiltCard>
+              </div>
             ))}
           </div>
         )}
