@@ -58,6 +58,55 @@ const ServicesSection = () => {
         borderTop: '1px solid var(--border-color)'
       }}
     >
+      {/* CSS para tarjetas uniformes */}
+      <style jsx>{`
+        .services-grid {
+          display: grid;
+          gap: clamp(20px, 4vw, 30px);
+          justify-items: stretch;
+          align-items: stretch;
+        }
+        
+        .service-card {
+          height: 520px !important;
+          min-height: 520px !important;
+          max-height: 520px !important;
+          width: 100% !important;
+        }
+        
+        @media (min-width: 1200px) {
+          .services-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          .service-card {
+            height: 540px !important;
+            min-height: 540px !important;
+            max-height: 540px !important;
+          }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1199px) {
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .service-card {
+            height: 500px !important;
+            min-height: 500px !important;
+            max-height: 500px !important;
+          }
+        }
+        
+        @media (max-width: 767px) {
+          .services-grid {
+            grid-template-columns: 1fr;
+          }
+          .service-card {
+            height: 450px !important;
+            min-height: 450px !important;
+            max-height: 450px !important;
+          }
+        }
+      `}</style>
       <div style={{
         maxWidth: '1400px',
         margin: '0 auto'
@@ -110,18 +159,13 @@ const ServicesSection = () => {
             </div>
           </div>
         ) : (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: 'clamp(20px, 4vw, 30px)'
-          }}>
+          <div className="services-grid">
             {services.map((service, index) => (
               <TiltCard
                 key={service.id}
+                className="service-card"
                 style={{
-                  animationDelay: `${index * 0.1}s`,
-                  height: 'clamp(450px, 50vh, 500px)',
-                  minHeight: '450px'
+                  animationDelay: `${index * 0.1}s`
                 }}
               >
                 <div style={{
