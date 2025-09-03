@@ -21,8 +21,8 @@ interface MacDockProps {
 const MacDock = ({ technologies, onClick }: MacDockProps) => {
   const mouseX = useMotionValue(Infinity)
   
-  // Detectar si es móvil
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 480
+  // Detectar si es móvil o tablet
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
 
   return (
     <motion.div
@@ -32,7 +32,7 @@ const MacDock = ({ technologies, onClick }: MacDockProps) => {
       style={{
         cursor: onClick ? 'pointer' : 'default',
         display: 'flex',
-        height: isMobile ? '140px' : '160px',
+        height: isMobile ? '120px' : '160px',
         alignItems: 'end',
         gap: isMobile ? '6px' : '8px',
         padding: isMobile ? '14px 18px' : '18px 24px',

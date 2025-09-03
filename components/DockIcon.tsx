@@ -21,8 +21,8 @@ interface DockIconProps {
 const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null)
   
-  // Detectar si es móvil
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 480
+  // Detectar si es móvil o tablet
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
 
   // Determinar el estilo de fondo basado en la configuración
   const getBackgroundStyle = () => {
@@ -66,7 +66,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   const iconSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [50, 50, 50] : [50, 70, 50])
   const iconSize = useSpring(iconSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
-  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [14, 14, 14] : [14, 16, 14])
+  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [12, 12, 12] : [14, 16, 14])
   const textSize = useSpring(textSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   return (
@@ -78,9 +78,9 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        height: '200px',
-        minWidth: '140px',
-        paddingBottom: '20px'
+        height: isMobile ? '120px' : '200px',
+        minWidth: isMobile ? '70px' : '140px',
+        paddingBottom: isMobile ? '8px' : '20px'
       }}
     >
       <motion.div
@@ -97,7 +97,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
           cursor: 'pointer',
           position: 'relative',
           overflow: 'hidden',
-          marginBottom: '8px'
+          marginBottom: isMobile ? '4px' : '8px'
         }}
         whileHover={{ 
           y: -8,
@@ -169,9 +169,11 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
           color: 'var(--text-primary)',
           transition: 'color 0.3s ease',
           whiteSpace: 'nowrap',
-          maxWidth: '140px',
+          maxWidth: isMobile ? '70px' : '140px',
           overflow: 'hidden',
-          textOverflow: 'ellipsis'
+          textOverflow: 'ellipsis',
+          lineHeight: '1.2',
+          paddingTop: isMobile ? '2px' : '4px'
         }}
       >
         {tech.name}
