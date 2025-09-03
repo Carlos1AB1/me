@@ -443,6 +443,7 @@ const ProjectsSection = () => {
         onClick={closeModal}
       >
         <div
+          className="modal-main-container"
           style={{
             background: 'var(--card-bg)',
             color: 'var(--text-primary)',
@@ -460,7 +461,7 @@ const ProjectsSection = () => {
           onClick={e => e.stopPropagation()}
         >
           {/* Header del Modal */}
-          <div style={{
+          <div className="modal-header" style={{
             padding: '20px 24px',
             borderBottom: '1px solid var(--border-color)',
             position: 'relative',
@@ -570,14 +571,14 @@ const ProjectsSection = () => {
           </div>
 
           {/* Contenido Principal: Imagen Grande */}
-          <div style={{
+          <div className="modal-content-wrapper" style={{
             flex: 1,
             display: 'flex',
             flexDirection: 'row',
             overflow: 'hidden'
           }}>
             {/* Sección de Imagen - Ahora más grande */}
-            <div style={{
+            <div className="modal-image-section" style={{
               flex: '1 1 70%',
               padding: '20px',
               display: 'flex',
@@ -588,7 +589,7 @@ const ProjectsSection = () => {
               position: 'relative'
             }}>
               {/* Contenedor de imagen principal - MUY GRANDE */}
-              <div style={{
+              <div className="modal-image-container" style={{
                 width: '100%',
                 height: '100%',
                 maxHeight: '600px',
@@ -596,7 +597,7 @@ const ProjectsSection = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
-                background: '#000',
+                background: 'var(--bg-secondary)',
                 borderRadius: '12px',
                 overflow: 'hidden',
                 boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
@@ -606,6 +607,7 @@ const ProjectsSection = () => {
                   <>
                     <button
                       onClick={prevImage}
+                      className="modal-nav-button"
                       style={{
                         position: 'absolute',
                         left: '16px',
@@ -632,6 +634,7 @@ const ProjectsSection = () => {
                     
                     <button
                       onClick={nextImage}
+                      className="modal-nav-button"
                       style={{
                         position: 'absolute',
                         right: '16px',
@@ -665,7 +668,7 @@ const ProjectsSection = () => {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'contain',
+                    objectFit: 'cover',
                     borderRadius: '12px'
                   }}
                 />
@@ -691,7 +694,7 @@ const ProjectsSection = () => {
             </div>
 
             {/* Panel de información - Más compacto */}
-            <div style={{
+            <div className="modal-info-section" style={{
               flex: '1 1 30%',
               padding: '20px',
               borderLeft: '1px solid var(--border-color)',
@@ -790,27 +793,65 @@ const ProjectsSection = () => {
           {/* Versión móvil */}
           <style jsx>{`
             @media (max-width: 768px) {
-              div:nth-child(2) {
+              .modal-main-container {
                 flex-direction: column !important;
                 height: 95vh !important;
+                width: 98vw !important;
               }
               
-              div:nth-child(2) > div:nth-child(2) > div:first-child {
-                flex: 1 1 60% !important;
-                padding: 16px !important;
+              .modal-content-wrapper {
+                flex-direction: column !important;
               }
               
-              div:nth-child(2) > div:nth-child(2) > div:last-child {
-                flex: 1 1 40% !important;
-                padding: 16px !important;
+              .modal-image-section {
+                flex: 1 1 50% !important;
+                padding: 12px !important;
+                min-height: 250px !important;
+              }
+              
+              .modal-info-section {
+                flex: 1 1 50% !important;
+                padding: 12px !important;
                 border-left: none !important;
                 border-top: 1px solid var(--border-color) !important;
+                max-height: 50% !important;
+                overflow-y: auto !important;
+              }
+              
+              .modal-image-container {
+                max-height: 220px !important;
+                height: 220px !important;
+              }
+
+              .modal-nav-button {
+                width: 40px !important;
+                height: 40px !important;
               }
             }
             
             @media (max-width: 480px) {
-              div:nth-child(2) > div:nth-child(2) > div:first-child > div {
-                max-height: 300px !important;
+              .modal-main-container {
+                height: 98vh !important;
+                width: 100vw !important;
+                border-radius: 8px !important;
+                margin: 0 !important;
+              }
+              
+              .modal-image-container {
+                max-height: 180px !important;
+                height: 180px !important;
+              }
+              
+              .modal-header {
+                padding: 12px 16px !important;
+              }
+
+              .modal-image-section {
+                padding: 8px !important;
+              }
+
+              .modal-info-section {
+                padding: 8px !important;
               }
             }
           `}</style>
