@@ -21,18 +21,43 @@ interface MacDockProps {
 const MacDock = ({ technologies, onClick }: MacDockProps) => {
   const mouseX = useMotionValue(Infinity)
   
-  // Detectar si es móvil o tablet
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+  // Detectar si es móvil o tablet con múltiples métodos
+  const isMobile = typeof window !== 'undefined' && 
+    (window.innerWidth <= 768 || 
+     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 
   return (
-    <motion.div
+    <>
+      <style jsx>{`
+        .dock-container {
+          overflow: visible !important;
+          padding-bottom: 40px !important;
+        }
+        
+        @media (max-width: 768px) {
+          .dock-container {
+            height: 100px !important;
+            padding: 8px 12px 30px 12px !important;
+            gap: 4px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .dock-container {
+            height: 90px !important;
+            padding: 6px 8px 25px 8px !important;
+            gap: 3px !important;
+          }
+        }
+      `}</style>
+      <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       onClick={onClick}
       style={{
         cursor: onClick ? 'pointer' : 'default',
         display: 'flex',
-        height: isMobile ? '120px' : '160px',
+        height: isMobile ? '100px' : '160px',
         alignItems: 'end',
         gap: isMobile ? '6px' : '8px',
         padding: isMobile ? '14px 18px' : '18px 24px',
@@ -53,6 +78,7 @@ const MacDock = ({ technologies, onClick }: MacDockProps) => {
         <DockIcon mouseX={mouseX} tech={tech} key={tech.name} />
       ))}
     </motion.div>
+    </>
   )
 }
 

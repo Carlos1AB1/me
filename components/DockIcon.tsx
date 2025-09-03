@@ -21,8 +21,10 @@ interface DockIconProps {
 const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null)
   
-  // Detectar si es móvil o tablet
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+  // Detectar si es móvil o tablet con múltiples métodos
+  const isMobile = typeof window !== 'undefined' && 
+    (window.innerWidth <= 768 || 
+     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 
   // Determinar el estilo de fondo basado en la configuración
   const getBackgroundStyle = () => {
@@ -66,23 +68,59 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
   const iconSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [50, 50, 50] : [50, 70, 50])
   const iconSize = useSpring(iconSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
-  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [12, 12, 12] : [14, 16, 14])
+  const textSizeSync = useTransform(distance, [-150, 0, 150], isMobile ? [8, 8, 8] : [14, 16, 14])
   const textSize = useSpring(textSizeSync, { mass: 0.05, stiffness: 400, damping: 20 })
 
   return (
-    <motion.div
-      ref={ref}
-      className="dock-icon"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        height: isMobile ? '120px' : '200px',
-        minWidth: isMobile ? '70px' : '140px',
-        paddingBottom: isMobile ? '8px' : '20px'
-      }}
-    >
+    <>
+      <style jsx>{`
+        .dock-icon {
+          overflow: visible !important;
+        }
+        
+        @media (max-width: 768px) {
+          .dock-icon {
+            height: 80px !important;
+            min-width: 60px !important;
+            padding-bottom: 4px !important;
+          }
+          
+          .dock-icon-text {
+            font-size: 9px !important;
+            max-width: 60px !important;
+            padding-top: 2px !important;
+            line-height: 1.1 !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .dock-icon {
+            height: 70px !important;
+            min-width: 50px !important;
+            padding-bottom: 2px !important;
+          }
+          
+          .dock-icon-text {
+            font-size: 8px !important;
+            max-width: 50px !important;
+            padding-top: 1px !important;
+            line-height: 1.1 !important;
+          }
+        }
+      `}</style>
+      <motion.div
+        ref={ref}
+        className="dock-icon"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          height: isMobile ? '80px' : '200px',
+          minWidth: isMobile ? '60px' : '140px',
+          paddingBottom: isMobile ? '4px' : '20px'
+        }}
+      >
       <motion.div
         style={{
           width,
@@ -162,6 +200,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
       </motion.div>
       
       <motion.span
+        className="dock-icon-text"
         style={{
           fontSize: textSize,
           fontWeight: '500',
@@ -169,7 +208,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
           color: 'var(--text-primary)',
           transition: 'color 0.3s ease',
           whiteSpace: 'nowrap',
-          maxWidth: isMobile ? '70px' : '140px',
+          maxWidth: isMobile ? '60px' : '140px',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           lineHeight: '1.2',
@@ -179,6 +218,7 @@ const DockIcon = ({ tech, mouseX }: DockIconProps) => {
         {tech.name}
       </motion.span>
     </motion.div>
+    </>
   )
 }
 
