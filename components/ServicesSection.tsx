@@ -63,47 +63,28 @@ const ServicesSection = () => {
         .services-grid {
           display: grid;
           gap: clamp(20px, 4vw, 30px);
-          justify-items: stretch;
-          align-items: stretch;
-        }
-        
-        .service-card {
-          height: 520px !important;
-          min-height: 520px !important;
-          max-height: 520px !important;
-          width: 100% !important;
+          justify-items: center;
+          align-items: start;
+          grid-template-columns: repeat(auto-fit, 380px);
+          justify-content: center;
         }
         
         @media (min-width: 1200px) {
           .services-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-          .service-card {
-            height: 540px !important;
-            min-height: 540px !important;
-            max-height: 540px !important;
+            grid-template-columns: repeat(3, 380px);
           }
         }
         
         @media (min-width: 768px) and (max-width: 1199px) {
           .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-          .service-card {
-            height: 500px !important;
-            min-height: 500px !important;
-            max-height: 500px !important;
+            grid-template-columns: repeat(2, 380px);
           }
         }
         
         @media (max-width: 767px) {
           .services-grid {
             grid-template-columns: 1fr;
-          }
-          .service-card {
-            height: 450px !important;
-            min-height: 450px !important;
-            max-height: 450px !important;
+            justify-items: center;
           }
         }
       `}</style>
@@ -161,26 +142,19 @@ const ServicesSection = () => {
         ) : (
           <div className="services-grid">
             {services.map((service, index) => (
-              <div 
+              <TiltCard
                 key={service.id}
                 style={{
+                  width: '380px',
                   height: '520px',
+                  minWidth: '380px',
+                  maxWidth: '380px',
                   minHeight: '520px',
                   maxHeight: '520px',
-                  width: '100%',
-                  display: 'flex',
-                  flexDirection: 'column'
+                  animationDelay: `${index * 0.1}s`,
+                  flexShrink: 0
                 }}
               >
-                <TiltCard
-                  className="service-card"
-                  style={{
-                    animationDelay: `${index * 0.1}s`,
-                    height: '100%',
-                    width: '100%',
-                    flex: 1
-                  }}
-                >
                 <div style={{
                   padding: 'clamp(20px, 4vw, 30px)',
                   height: '100%',
@@ -336,7 +310,6 @@ const ServicesSection = () => {
                   </div>
                 </div>
               </TiltCard>
-              </div>
             ))}
           </div>
         )}
