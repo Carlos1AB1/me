@@ -355,9 +355,13 @@ const ProjectsSection = () => {
                     WebkitBoxOrient: 'vertical',
                     marginBottom: '20px'
                   }}>
-                    {project.description && project.description.length > 120 
-                      ? project.description.substring(0, 120) + '...'
-                      : project.description || 'Ver más detalles en el proyecto'}
+                    {project.description && project.description.length > 0
+                      ? (project.description.length > 120 
+                          ? project.description.substring(0, 120) + '...'
+                          : project.description)
+                      : `Proyecto desarrollado${project.technologies_list && project.technologies_list.length > 0 
+                          ? ` con ${project.technologies_list.slice(0, 2).join(', ')}${project.technologies_list.length > 2 ? ' y más' : ''}` 
+                          : ' con tecnologías modernas'}.`}
                   </div>
                 </div>
 
