@@ -26,6 +26,10 @@ const ProjectsSection = () => {
         // Convertir datos del backend al formato esperado
   // El backend ya devuelve project.images (array de objetos con image y order)
   console.log('Projects data from Django:', projectsData)
+  if (projectsData && projectsData.length > 0) {
+    console.log('First project structure:', projectsData[0])
+    console.log('Available fields:', Object.keys(projectsData[0]))
+  }
   setProjects(projectsData)
       } catch (error) {
         console.error('Error loading projects:', error)
@@ -356,13 +360,28 @@ const ProjectsSection = () => {
                     WebkitBoxOrient: 'vertical',
                     marginBottom: '20px'
                   }}>
+                    {(() => {
+                      console.log(`Project ${index} fields:`, Object.keys(project))
+                      console.log(`Project ${index} description:`, project.description)
+                      console.log(`Project ${index} short_description:`, project.short_description)
+                      console.log(`Project ${index} summary:`, project.summary)
+                      return null
+                    })()}
                     {project.description && project.description.trim() !== ''
                       ? (project.description.length > 120 
                           ? project.description.substring(0, 120) + '...'
                           : project.description)
-                      : `Proyecto desarrollado${project.technologies_list && project.technologies_list.length > 0 
-                          ? ` con ${project.technologies_list.slice(0, 2).join(', ')}${project.technologies_list.length > 2 ? ' y más' : ''}` 
-                          : ' con tecnologías modernas'}.`}
+                      : project.short_description && project.short_description.trim() !== ''
+                        ? (project.short_description.length > 120 
+                            ? project.short_description.substring(0, 120) + '...'
+                            : project.short_description)
+                        : project.summary && project.summary.trim() !== ''
+                          ? (project.summary.length > 120 
+                              ? project.summary.substring(0, 120) + '...'
+                              : project.summary)
+                          : `Proyecto desarrollado${project.technologies_list && project.technologies_list.length > 0 
+                              ? ` con ${project.technologies_list.slice(0, 2).join(', ')}${project.technologies_list.length > 2 ? ' y más' : ''}` 
+                              : ' con tecnologías modernas'}.`}
                   </div>
                 </div>
 
@@ -700,9 +719,20 @@ const ProjectsSection = () => {
                 lineHeight: '1.6',
                 marginBottom: '24px'
               }}>
+                {(() => {
+                  console.log('Modal project fields:', Object.keys(modalProject))
+                  console.log('Modal description:', modalProject.description)
+                  console.log('Modal short_description:', modalProject.short_description)
+                  console.log('Modal summary:', modalProject.summary)
+                  return null
+                })()}
                 {modalProject.description && modalProject.description.trim() !== '' 
                   ? modalProject.description 
-                  : 'No hay descripción disponible para este proyecto.'}
+                  : modalProject.short_description && modalProject.short_description.trim() !== ''
+                    ? modalProject.short_description
+                    : modalProject.summary && modalProject.summary.trim() !== ''
+                      ? modalProject.summary
+                      : 'No hay descripción disponible para este proyecto.'}
               </div>
 
               {/* Detalles técnicos */}
