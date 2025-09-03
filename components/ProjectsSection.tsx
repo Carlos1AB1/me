@@ -452,7 +452,8 @@ const ProjectsSection = () => {
             boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
             width: '95vw',
             height: '90vh',
-            maxWidth: '1200px',
+            maxWidth: '1400px',
+            maxHeight: '90vh',
             display: 'flex',
             flexDirection: 'column',
             position: 'relative',
@@ -592,14 +593,14 @@ const ProjectsSection = () => {
               <div className="modal-image-container" style={{
                 width: '100%',
                 height: '100%',
-                maxHeight: '600px',
+                maxHeight: '700px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 position: 'relative',
-                background: 'var(--bg-secondary)',
+                background: 'transparent',
                 borderRadius: '12px',
-                overflow: 'hidden',
+                overflow: 'visible',
                 boxShadow: '0 10px 30px rgba(0,0,0,0.3)'
               }}>
                 {/* Navegación de imágenes */}
@@ -666,9 +667,11 @@ const ProjectsSection = () => {
                   src={modalImages[modalIndex]}
                   alt={modalProject.title}
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: 'auto',
+                    height: 'auto',
+                    objectFit: 'contain',
                     borderRadius: '12px'
                   }}
                 />
