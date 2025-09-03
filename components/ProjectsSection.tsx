@@ -467,7 +467,7 @@ const ProjectsSection = () => {
 
           .modal-image-container {
             width: 100%;
-            height: 400px;
+            height: 450px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -516,7 +516,7 @@ const ProjectsSection = () => {
             }
 
             .modal-image-container {
-              height: 280px !important;
+              height: 320px !important;
             }
           }
 
@@ -534,7 +534,7 @@ const ProjectsSection = () => {
             }
 
             .modal-image-container {
-              height: 250px !important;
+              height: 280px !important;
             }
           }
         `}</style>
@@ -670,7 +670,7 @@ const ProjectsSection = () => {
               {/* Imagen principal */}
               <div className="modal-image-container" style={{
                 width: '100%',
-                height: '400px',
+                height: '450px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -716,7 +716,7 @@ const ProjectsSection = () => {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'contain',
+                    objectFit: 'cover',
                     borderRadius: '12px'
                   }}
                 />
