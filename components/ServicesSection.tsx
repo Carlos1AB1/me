@@ -156,47 +156,63 @@ const ServicesSection = () => {
                 }}
               >
                 <div style={{
-                  padding: 'clamp(20px, 4vw, 30px)',
-                  height: '100%',
+                  padding: '24px',
+                  height: '520px',
+                  maxHeight: '520px',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  overflow: 'hidden',
+                  boxSizing: 'border-box'
                 }}>
                   {/* Service Icon */}
                   <div style={{
-                    fontSize: 'clamp(40px, 8vw, 48px)',
-                    marginBottom: '20px',
-                    textAlign: 'center'
+                    fontSize: '42px',
+                    marginBottom: '16px',
+                    textAlign: 'center',
+                    height: '58px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
                   }}>
                     {service.icon}
                   </div>
 
                   {/* Service Title */}
                   <h3 style={{
-                    fontSize: 'clamp(20px, 4vw, 24px)',
+                    fontSize: '22px',
                     fontWeight: '600',
                     marginBottom: '12px',
                     color: 'var(--text-primary)',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    height: '56px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    lineHeight: '1.2',
+                    overflow: 'hidden',
+                    flexShrink: 0
                   }}>
                     {service.title}
                   </h3>
 
                   {/* Service Description */}
                   <div style={{
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    marginBottom: '20px'
+                    height: '120px',
+                    marginBottom: '16px',
+                    overflow: 'hidden',
+                    flexShrink: 0
                   }}>
                     <p style={{
-                      fontSize: '15px',
+                      fontSize: '14px',
                       color: 'var(--text-secondary)',
-                      lineHeight: '1.6',
+                      lineHeight: '1.5',
                       textAlign: 'center',
                       margin: 0,
+                      height: '100%',
                       overflow: 'hidden',
                       display: '-webkit-box',
-                      WebkitLineClamp: 4,
+                      WebkitLineClamp: 5,
                       WebkitBoxOrient: 'vertical'
                     }}>
                       {service.short_description}
@@ -205,8 +221,13 @@ const ServicesSection = () => {
 
                   {/* Category Badge */}
                   <div style={{
-                    marginBottom: '24px',
-                    textAlign: 'center'
+                    marginBottom: '16px',
+                    textAlign: 'center',
+                    height: '32px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
                   }}>
                     <span style={{
                       display: 'inline-flex',
@@ -227,10 +248,12 @@ const ServicesSection = () => {
                   {/* Price and Duration */}
                   <div style={{
                     borderTop: '1px solid var(--border-color)',
-                    paddingTop: '20px',
+                    paddingTop: '16px',
                     display: 'flex',
                     justifyContent: 'space-between',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    height: '80px',
+                    flexShrink: 0
                   }}>
                     <div>
                           <div>
