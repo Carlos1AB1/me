@@ -25,11 +25,6 @@ const ProjectsSection = () => {
         
         // Convertir datos del backend al formato esperado
   // El backend ya devuelve project.images (array de objetos con image y order)
-  console.log('Projects data from Django:', projectsData)
-  if (projectsData && projectsData.length > 0) {
-    console.log('First project structure:', projectsData[0])
-    console.log('Available fields:', Object.keys(projectsData[0]))
-  }
   setProjects(projectsData)
       } catch (error) {
         console.error('Error loading projects:', error)
@@ -320,7 +315,7 @@ const ProjectsSection = () => {
                     textTransform: 'uppercase',
                     letterSpacing: '0.5px'
                   }}>
-                    {project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
+                    {project.featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
                   </div>
 
                   {/* Graduation cap icon */}
@@ -360,28 +355,13 @@ const ProjectsSection = () => {
                     WebkitBoxOrient: 'vertical',
                     marginBottom: '20px'
                   }}>
-                    {(() => {
-                      console.log(`Project ${index} fields:`, Object.keys(project))
-                      console.log(`Project ${index} description:`, project.description)
-                      console.log(`Project ${index} short_description:`, project.short_description)
-                      console.log(`Project ${index} summary:`, project.summary)
-                      return null
-                    })()}
-                    {project.description && project.description.trim() !== ''
-                      ? (project.description.length > 120 
-                          ? project.description.substring(0, 120) + '...'
-                          : project.description)
-                      : project.short_description && project.short_description.trim() !== ''
-                        ? (project.short_description.length > 120 
-                            ? project.short_description.substring(0, 120) + '...'
-                            : project.short_description)
-                        : project.summary && project.summary.trim() !== ''
-                          ? (project.summary.length > 120 
-                              ? project.summary.substring(0, 120) + '...'
-                              : project.summary)
-                          : `Proyecto desarrollado${project.technologies_list && project.technologies_list.length > 0 
-                              ? ` con ${project.technologies_list.slice(0, 2).join(', ')}${project.technologies_list.length > 2 ? ' y más' : ''}` 
-                              : ' con tecnologías modernas'}.`}
+                    {project.short_description && project.short_description.trim() !== ''
+                      ? (project.short_description.length > 120 
+                          ? project.short_description.substring(0, 120) + '...'
+                          : project.short_description)
+                      : `Proyecto desarrollado${project.technologies_list && project.technologies_list.length > 0 
+                          ? ` con ${project.technologies_list.slice(0, 2).join(', ')}${project.technologies_list.length > 2 ? ' y más' : ''}` 
+                          : ' con tecnologías modernas'}.`}
                   </div>
                 </div>
 
@@ -507,7 +487,7 @@ const ProjectsSection = () => {
               textTransform: 'uppercase',
               letterSpacing: '0.5px'
             }}>
-              {modalProject.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
+              {modalProject.featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
             </div>
 
             <h2 style={{
@@ -555,9 +535,9 @@ const ProjectsSection = () => {
                   <Github size={16} /> Código fuente
                 </a>
               )}
-              {modalProject.demo_url && (
+              {modalProject.live_url && (
                 <a
-                  href={modalProject.demo_url}
+                  href={modalProject.live_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -719,24 +699,13 @@ const ProjectsSection = () => {
                 lineHeight: '1.6',
                 marginBottom: '24px'
               }}>
-                {(() => {
-                  console.log('Modal project fields:', Object.keys(modalProject))
-                  console.log('Modal description:', modalProject.description)
-                  console.log('Modal short_description:', modalProject.short_description)
-                  console.log('Modal summary:', modalProject.summary)
-                  return null
-                })()}
-                {modalProject.description && modalProject.description.trim() !== '' 
-                  ? modalProject.description 
-                  : modalProject.short_description && modalProject.short_description.trim() !== ''
-                    ? modalProject.short_description
-                    : modalProject.summary && modalProject.summary.trim() !== ''
-                      ? modalProject.summary
-                      : 'No hay descripción disponible para este proyecto.'}
+                {modalProject.short_description && modalProject.short_description.trim() !== '' 
+                  ? modalProject.short_description 
+                  : 'No hay descripción disponible para este proyecto.'}
               </div>
 
               {/* Detalles técnicos */}
-              {modalProject.features && modalProject.features.length > 0 && (
+              {modalProject.technologies_list && modalProject.technologies_list.length > 0 && (
                 <div style={{ marginBottom: '24px' }}>
                   <h4 style={{
                     fontSize: '16px',
@@ -744,30 +713,27 @@ const ProjectsSection = () => {
                     marginBottom: '12px',
                     color: 'var(--text-primary)'
                   }}>
-                    Características técnicas
+                    Tecnologías utilizadas
                   </h4>
-                  <ul style={{
-                    listStyle: 'none',
-                    padding: 0,
-                    margin: 0
+                  <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '8px'
                   }}>
-                    {modalProject.features.map((feature: string, index: number) => (
-                      <li key={index} style={{
-                        fontSize: '14px',
-                        color: 'var(--text-secondary)',
-                        marginBottom: '8px',
-                        paddingLeft: '16px',
-                        position: 'relative'
+                    {modalProject.technologies_list.map((tech: string, index: number) => (
+                      <span key={index} style={{
+                        fontSize: '12px',
+                        color: 'var(--text-primary)',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border-color)',
+                        padding: '4px 8px',
+                        borderRadius: '6px',
+                        fontWeight: '500'
                       }}>
-                        <span style={{
-                          position: 'absolute',
-                          left: 0,
-                          color: '#1d6ff2'
-                        }}>•</span>
-                        {feature}
-                      </li>
+                        {tech}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
 
@@ -788,22 +754,20 @@ const ProjectsSection = () => {
                 }}>
                   Información del proyecto
                 </h4>
-                {modalProject.created_at && (
+                <div style={{
+                  fontSize: '13px',
+                  color: 'var(--text-secondary)',
+                  marginBottom: '8px'
+                }}>
+                  <strong>ID:</strong> {modalProject.id}
+                </div>
+                {modalProject.priority && (
                   <div style={{
                     fontSize: '13px',
                     color: 'var(--text-secondary)',
                     marginBottom: '8px'
                   }}>
-                    <strong>Fecha:</strong> {new Date(modalProject.created_at).toLocaleDateString()}
-                  </div>
-                )}
-                {modalProject.category && (
-                  <div style={{
-                    fontSize: '13px',
-                    color: 'var(--text-secondary)',
-                    marginBottom: '8px'
-                  }}>
-                    <strong>Categoría:</strong> {modalProject.category}
+                    <strong>Prioridad:</strong> {modalProject.priority}
                   </div>
                 )}
               </div>
