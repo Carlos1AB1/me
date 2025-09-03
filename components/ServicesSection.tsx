@@ -120,7 +120,8 @@ const ServicesSection = () => {
                 key={service.id}
                 style={{
                   animationDelay: `${index * 0.1}s`,
-                  height: '100%'
+                  height: 'clamp(450px, 50vh, 500px)',
+                  minHeight: '450px'
                 }}
               >
                 <div style={{
@@ -150,16 +151,26 @@ const ServicesSection = () => {
                   </h3>
 
                   {/* Service Description */}
-                  <p style={{
-                    fontSize: '15px',
-                    color: 'var(--text-secondary)',
-                    lineHeight: '1.6',
-                    marginBottom: '20px',
-                    textAlign: 'center',
-                    flex: 1
+                  <div style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    marginBottom: '20px'
                   }}>
-                    {service.short_description}
-                  </p>
+                    <p style={{
+                      fontSize: '15px',
+                      color: 'var(--text-secondary)',
+                      lineHeight: '1.6',
+                      textAlign: 'center',
+                      margin: 0,
+                      overflow: 'hidden',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 4,
+                      WebkitBoxOrient: 'vertical'
+                    }}>
+                      {service.short_description}
+                    </p>
+                  </div>
 
                   {/* Category Badge */}
                   <div style={{
