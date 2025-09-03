@@ -293,111 +293,84 @@ const ProjectsSection = () => {
             >
               <div style={{
                 padding: '24px',
-                paddingBottom: '244px',
-                position: 'relative',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 cursor: 'pointer'
               }}>
-                {/* Contenedor de contenido superior (fija altura mínima) */}
-                <div style={{ minHeight: '212px' }}>
-                {/* Tag */}
-                <div style={{
-                  background: '#1d6ff2',
-                  color: 'white',
-                  fontSize: '10px',
-                  fontWeight: '600',
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  display: 'inline-block',
-                  alignSelf: 'flex-start',
-                  marginBottom: '16px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}>
-                  {project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
-                </div>
+                {/* Contenedor de contenido superior */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  {/* Tag */}
+                  <div style={{
+                    background: '#1d6ff2',
+                    color: 'white',
+                    fontSize: '10px',
+                    fontWeight: '600',
+                    padding: '4px 8px',
+                    borderRadius: '4px',
+                    display: 'inline-block',
+                    alignSelf: 'flex-start',
+                    marginBottom: '16px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    {project.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
+                  </div>
 
-                {/* Graduation cap icon */}
-                <div style={{
-                  position: 'absolute',
-                  top: '20px',
-                  right: '20px',
-                  fontSize: '20px',
-                  color: 'var(--text-secondary)'
-                }}>
-                  👨🏻‍💻
-                </div>
+                  {/* Graduation cap icon */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '20px',
+                    right: '20px',
+                    fontSize: '20px',
+                    color: 'var(--text-secondary)'
+                  }}>
+                    👨🏻‍💻
+                  </div>
 
-                {/* Title */}
-                <h3 style={{
-                  fontSize: '28px',
-                  fontWeight: '600',
-                  marginBottom: '8px',
-                  color: 'var(--text-primary)',
-                  lineHeight: '1.2'
-                }}>
-                  {project.title}
-                </h3>
+                  {/* Title */}
+                  <h3 style={{
+                    fontSize: '24px',
+                    fontWeight: '600',
+                    marginBottom: '12px',
+                    color: 'var(--text-primary)',
+                    lineHeight: '1.3',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical'
+                  }}>
+                    {project.title}
+                  </h3>
 
-                {/* Subtitle */}
-                <div style={{
-                  color: '#af52de',
-                  fontSize: '17px',
-                  fontWeight: '400',
-                  marginBottom: '16px'
-                }}>
-                  {(project.technologies_list || project.technologies || []).join(', ')}<sup>Δ</sup>
-                </div>
-
-                {/* GitHub link */}
-                {project.github_url && (
-                  <a
-                    href={project.github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      color: 'var(--text-primary, #fff)',
-                      fontWeight: 500,
-                      fontSize: '15px',
-                      marginBottom: '8px',
-                      textDecoration: 'none',
-                      transition: 'color 0.2s'
-                    }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    <Github size={18} /> Código fuente
-                  </a>
-                )}
-
-                {/* Description */}
-                <div style={{
-                  fontSize: '17px',
-                  color: 'var(--text-primary)',
-                  marginBottom: '24px'
-                }}>
-                  {project.description}
-                </div>
+                  {/* Short Description */}
+                  <div style={{
+                    fontSize: '15px',
+                    color: 'var(--text-secondary)',
+                    lineHeight: '1.5',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    marginBottom: '20px'
+                  }}>
+                    {project.description && project.description.length > 120 
+                      ? project.description.substring(0, 120) + '...'
+                      : project.description || 'Ver más detalles en el proyecto'}
+                  </div>
                 </div>
 
                 {/* Imagen principal (alineada al fondo de la card) */}
                 <div className="project-card" style={{
-                  position: 'absolute',
-                  left: '24px',
-                  right: '24px',
-                  bottom: '24px',
                   height: '220px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   overflow: 'hidden',
                   borderRadius: '12px',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.08)'
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                  marginTop: 'auto'
                 }}>
                   {project.images && project.images.length > 0 ? (
                     <div className="project-image-container" style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -457,158 +430,348 @@ const ProjectsSection = () => {
       >
         <div
           style={{
-            background: 'var(--card-bg, #181824)',
-            color: 'var(--text-primary, #fff)',
-            borderRadius: '16px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-            padding: '32px 24px',
-            minWidth: '340px',
-            maxWidth: '90vw',
+            background: 'var(--card-bg)',
+            color: 'var(--text-primary)',
+            borderRadius: '20px',
+            border: '1px solid var(--border-color)',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
+            width: '90vw',
+            maxWidth: '900px',
             maxHeight: '90vh',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
             position: 'relative',
-            transition: 'background 0.2s, color 0.2s',
+            overflow: 'hidden'
           }}
           onClick={e => e.stopPropagation()}
         >
-          {/* Cerrar */}
-          <button
-            onClick={closeModal}
-            style={{
-              position: 'absolute',
-              top: 4,
-              right: 4,
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              padding: 4,
-              zIndex: 2,
-              color: 'var(--text-primary, #fff)'
-            }}
-            aria-label="Cerrar galería"
-          >
-            <X size={28} />
-          </button>
-          {/* Imagen principal */}
+          {/* Header del Modal */}
           <div style={{
-            width: 'min(70vw, 600px)',
-            height: 'min(60vh, 400px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            marginBottom: '18px',
-            background: 'var(--modal-image-bg, #232336)',
-            borderRadius: '12px',
+            padding: '24px 32px 20px',
+            borderBottom: '1px solid var(--border-color)',
+            position: 'relative'
           }}>
-            {/* Flecha izquierda */}
-            {modalImages.length > 1 && (
-              <button
-                onClick={prevImage}
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'rgba(255,255,255,0.7)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 38,
-                  height: 38,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  zIndex: 2
-                }}
-                aria-label="Anterior"
-              >
-                <ArrowLeft size={22} />
-              </button>
-            )}
-            {/* Imagen */}
-            <img
-              src={modalImages[modalIndex]}
-              alt={modalProject.title}
+            <button
+              onClick={closeModal}
               style={{
-                maxWidth: '100%',
-                maxHeight: '100%',
-                borderRadius: '12px',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.10)',
-                background: 'var(--modal-image-bg, #232336)'
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                padding: '8px',
+                color: 'var(--text-primary)',
+                transition: 'all 0.2s ease'
               }}
-            />
-            {/* Flecha derecha */}
-            {modalImages.length > 1 && (
-              <button
-                onClick={nextImage}
-                style={{
-                  position: 'absolute',
-                  right: 0,
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: 'rgba(255,255,255,0.7)',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: 38,
-                  height: 38,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  zIndex: 2
-                }}
-                aria-label="Siguiente"
-              >
-                <ArrowRight size={22} />
-              </button>
-            )}
+              aria-label="Cerrar proyecto"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Título y badge */}
+            <div style={{
+              background: '#1d6ff2',
+              color: 'white',
+              fontSize: '11px',
+              fontWeight: '600',
+              padding: '4px 10px',
+              borderRadius: '6px',
+              display: 'inline-block',
+              marginBottom: '12px',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px'
+            }}>
+              {modalProject.is_featured ? 'PROYECTO DESTACADO' : 'PROYECTO'}
+            </div>
+
+            <h2 style={{
+              fontSize: '28px',
+              fontWeight: '700',
+              margin: '0 0 8px 0',
+              color: 'var(--text-primary)',
+              lineHeight: '1.2'
+            }}>
+              {modalProject.title}
+            </h2>
+
+            {/* Tecnologías */}
+            <div style={{
+              color: '#af52de',
+              fontSize: '16px',
+              fontWeight: '500',
+              marginBottom: '12px'
+            }}>
+              {(modalProject.technologies_list || modalProject.technologies || []).join(', ')}
+            </div>
+
+            {/* Enlaces */}
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              {modalProject.github_url && (
+                <a
+                  href={modalProject.github_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    color: 'var(--text-primary)',
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    textDecoration: 'none',
+                    background: 'var(--bg-secondary)',
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid var(--border-color)',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  <Github size={16} /> Código fuente
+                </a>
+              )}
+              {modalProject.demo_url && (
+                <a
+                  href={modalProject.demo_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    color: 'white',
+                    fontWeight: '500',
+                    fontSize: '14px',
+                    textDecoration: 'none',
+                    background: '#1d6ff2',
+                    padding: '6px 12px',
+                    borderRadius: '8px',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  🚀 Ver demo
+                </a>
+              )}
+            </div>
           </div>
-          {/* Título y descripción */}
-          <h3 style={{ fontSize: 22, fontWeight: 600, marginBottom: 8, color: 'var(--text-primary, #fff)' }}>{modalProject.title}</h3>
-          <div style={{ color: 'var(--accent, #af52de)', fontSize: 15, marginBottom: 12 }}>{(modalProject.technologies_list || modalProject.technologies || []).join(', ')}</div>
-          <div style={{ color: 'var(--text-secondary, #ccc)', fontSize: 16, marginBottom: 12 }}>{modalProject.description}</div>
-          {/* GitHub link */}
-          {modalProject.github_url && (
-            <a
-              href={modalProject.github_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
+
+          {/* Contenido del Modal */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'row',
+            flex: 1,
+            overflow: 'hidden'
+          }}>
+            {/* Galería de imágenes */}
+            <div style={{
+              flex: '1 1 60%',
+              padding: '24px',
+              display: 'flex',
+              flexDirection: 'column'
+            }}>
+              {/* Imagen principal */}
+              <div style={{
+                width: '100%',
+                height: '400px',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
-                color: 'var(--text-primary, #fff)',
-                fontWeight: 500,
-                fontSize: '15px',
-                marginBottom: '8px',
-                textDecoration: 'none'
-              }}
-            >
-              <Github size={18} /> Código fuente
-            </a>
-          )}
-          {/* Paginación */}
-          {modalImages.length > 1 && (
-            <div style={{ display: 'flex', gap: 6, marginTop: 10 }}>
-              {modalImages.map((img, i) => (
-                <div
-                  key={i}
+                justifyContent: 'center',
+                position: 'relative',
+                background: 'var(--bg-secondary)',
+                borderRadius: '12px',
+                border: '1px solid var(--border-color)',
+                overflow: 'hidden'
+              }}>
+                {/* Flecha izquierda */}
+                {modalImages.length > 1 && (
+                  <button
+                    onClick={prevImage}
+                    style={{
+                      position: 'absolute',
+                      left: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'rgba(255,255,255,0.9)',
+                      border: '1px solid var(--border-color)',
+                      borderRadius: '50%',
+                      width: '44px',
+                      height: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 2,
+                      color: 'var(--text-primary)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      transition: 'all 0.2s ease'
+                    }}
+                    aria-label="Imagen anterior"
+                  >
+                    <ArrowLeft size={20} />
+                  </button>
+                )}
+
+                {/* Imagen */}
+                <img
+                  src={modalImages[modalIndex]}
+                  alt={modalProject.title}
                   style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: '50%',
-                    background: i === modalIndex ? '#1d6ff2' : '#e0e0e0',
-                    border: '1px solid #bdbdbd',
-                    cursor: 'pointer',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    borderRadius: '12px'
                   }}
-                  onClick={() => setModalIndex(i)}
                 />
-              ))}
+
+                {/* Flecha derecha */}
+                {modalImages.length > 1 && (
+                  <button
+                    onClick={nextImage}
+                    style={{
+                      position: 'absolute',
+                      right: '12px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'rgba(255,255,255,0.9)',
+                      border: '1px solid var(--border-color)',
+                      borderRadius: '50%',
+                      width: '44px',
+                      height: '44px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 2,
+                      color: 'var(--text-primary)',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                      transition: 'all 0.2s ease'
+                    }}
+                    aria-label="Imagen siguiente"
+                  >
+                    <ArrowRight size={20} />
+                  </button>
+                )}
+
+                {/* Indicador de imagen */}
+                {modalImages.length > 1 && (
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '12px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'rgba(0,0,0,0.7)',
+                    color: 'white',
+                    padding: '4px 12px',
+                    borderRadius: '12px',
+                    fontSize: '12px',
+                    fontWeight: '500'
+                  }}>
+                    {modalIndex + 1} / {modalImages.length}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+
+            {/* Información del proyecto */}
+            <div style={{
+              flex: '1 1 40%',
+              padding: '24px',
+              borderLeft: '1px solid var(--border-color)',
+              overflow: 'auto'
+            }}>
+              <h3 style={{
+                fontSize: '18px',
+                fontWeight: '600',
+                marginBottom: '16px',
+                color: 'var(--text-primary)'
+              }}>
+                Descripción del proyecto
+              </h3>
+
+              <div style={{
+                fontSize: '15px',
+                color: 'var(--text-secondary)',
+                lineHeight: '1.6',
+                marginBottom: '24px'
+              }}>
+                {modalProject.description}
+              </div>
+
+              {/* Detalles técnicos */}
+              {modalProject.features && modalProject.features.length > 0 && (
+                <div style={{ marginBottom: '24px' }}>
+                  <h4 style={{
+                    fontSize: '16px',
+                    fontWeight: '600',
+                    marginBottom: '12px',
+                    color: 'var(--text-primary)'
+                  }}>
+                    Características técnicas
+                  </h4>
+                  <ul style={{
+                    listStyle: 'none',
+                    padding: 0,
+                    margin: 0
+                  }}>
+                    {modalProject.features.map((feature: string, index: number) => (
+                      <li key={index} style={{
+                        fontSize: '14px',
+                        color: 'var(--text-secondary)',
+                        marginBottom: '8px',
+                        paddingLeft: '16px',
+                        position: 'relative'
+                      }}>
+                        <span style={{
+                          position: 'absolute',
+                          left: 0,
+                          color: '#1d6ff2'
+                        }}>•</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Metadata adicional */}
+              <div style={{
+                background: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)',
+                borderRadius: '8px',
+                padding: '16px'
+              }}>
+                <h4 style={{
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  marginBottom: '12px',
+                  color: 'var(--text-primary)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}>
+                  Información del proyecto
+                </h4>
+                {modalProject.created_at && (
+                  <div style={{
+                    fontSize: '13px',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '8px'
+                  }}>
+                    <strong>Fecha:</strong> {new Date(modalProject.created_at).toLocaleDateString()}
+                  </div>
+                )}
+                {modalProject.category && (
+                  <div style={{
+                    fontSize: '13px',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '8px'
+                  }}>
+                    <strong>Categoría:</strong> {modalProject.category}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )}
