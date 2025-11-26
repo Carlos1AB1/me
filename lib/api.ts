@@ -1,7 +1,7 @@
 // lib/api.ts
 // Configuración y utilidades para conectar el frontend Next.js con el backend Django
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
 
 // Tipos para la respuesta de autenticación
 interface AuthTokens {
