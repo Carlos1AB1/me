@@ -4,7 +4,7 @@ Portafolio personal desarrollado con Next.js y desplegado en Vercel.
 
 ## URLs
 - **Producción:** https://arturo.engineer
-- **Backend:** https://me-backend-vguc.onrender.com
+- **Backend:** https://cabaron23.pythonanywhere.com
 
 ## Auto-Deploy
 ✅ Auto-deploy activado desde GitHub
