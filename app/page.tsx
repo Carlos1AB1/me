@@ -35,7 +35,11 @@ export default function Home() {
         setLoading(true)
         // Cargar habilidades del backend
         const skillsData = await apiClient.getFeaturedSkills()
-        console.log('Skills data received:', skillsData) // Debug log
+        console.log('=== DEBUG SKILLS ===')
+        console.log('Skills data received:', skillsData)
+        console.log('Primera imagen URL:', skillsData[0]?.image)
+        console.log('API Base URL:', process.env.NEXT_PUBLIC_API_URL)
+        console.log('==================')
         setSkills(skillsData)
         
         // Convertir habilidades a formato de tecnologías para el MacDock
